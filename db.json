@@ -253,31 +253,43 @@
       "rating": 4.8
     }
   ],
-  "wishlist": [
+  "wishlist": [],
+  "carts": [
     {
       "userId": "f5N76aLTQgg",
-      "productId": "1",
-      "id": "yMXzniGF97c"
+      "name": "R34 TE37 Wheels",
+      "brand": "RAYS",
+      "category": "Wheels",
+      "price": 1599.99,
+      "image": "./src/assets/products/r34-wheels.png",
+      "id": "nn1p-o97T8k"
     },
     {
       "userId": "f5N76aLTQgg",
-      "productId": "2",
-      "id": "flRdLM4XvxY"
+      "name": "MK4 Racing Wheels",
+      "brand": "RAYS",
+      "category": "Wheels",
+      "price": 1499.99,
+      "image": "./src/assets/products/mk4-wheels.png",
+      "id": "XMs9ZaOatXE"
     },
     {
       "userId": "f5N76aLTQgg",
-      "productId": "19",
-      "id": "r_xspqIN9QE"
+      "name": "MK3 Forged Wheels",
+      "brand": "RAYS",
+      "category": "Wheels",
+      "price": 1299.99,
+      "image": "./src/assets/products/mk3-wheels.png",
+      "id": "ZUAzW0IqKgE"
     },
     {
       "userId": "f5N76aLTQgg",
-      "productId": "16",
-      "id": "bJHHJYXp3_8"
-    },
-    {
-      "userId": "f5N76aLTQgg",
-      "productId": "14",
-      "id": "64Ee2ug26QU"
+      "name": "R35 GT Wing",
+      "brand": "Varis",
+      "category": "Spoiler",
+      "price": 549.99,
+      "image": "./src/assets/products/r35-spoiler.png",
+      "id": "CVekKbWANHE"
     }
   ],
   "users": [

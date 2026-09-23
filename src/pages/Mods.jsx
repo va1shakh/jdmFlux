@@ -5,6 +5,10 @@ import { ProductCard } from "../components/ProductCard";
 import { useEffect, useState } from "react";
 import { addWishlist } from "../api/wishlist/addWishlist";
 import { useSelector } from "react-redux";
+import { getWishlist } from "../api/wishlist/getWishlist";
+import { dltWishlist } from "../api/wishlist/dltWishlist";
+import { addToCart } from "../api/cart/addToCart";
+import { useNavigate } from "react-router";
 
 function Mods() {
   const [search, setSearch] = useState("");
@@ -12,6 +16,7 @@ function Mods() {
   const [category, setCategory] = useState("all");
   const [sort, setSort] = useState("");
   const user = useSelector((state) => state.auth.user);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -25,14 +30,59 @@ function Mods() {
     queryFn: () => getProducts({ Dsearch, category, sort }),
   });
 
+  const { data: wishlist = [] } = useQuery({
+    queryKey: ["wishlist"],
+    queryFn: () => getWishlist(user.id),
+    enabled: !!user,
+  });
+
   const wishlistMutation = useMutation({
     mutationFn: addWishlist,
-    
-  })
+    onSuccess: () => {
+      console.log("added");
+    },
+    onError: () => {
+      console.log("error");
+    },
+  });
+
+  const dltWishlistMutation = useMutation({
+    mutationFn: dltWishlist,
+    onSuccess: () => {
+      console.log("removed");
+    },
+  });
   const handleWishlist = (product) => {
-    wishlistMutation.mutate({
-      userId: user?.id,
-      productId: product.id
+    const wishlistItem = wishlist.find((item) => item.productId === product.id);
+    if (wishlistItem) {
+      dltWishlistMutation.mutate(wishlistItem.id);
+    } else {
+      wishlistMutation.mutate({
+        userId: user?.id,
+        productId: product.id,
+      });
+    }
+  };
+
+  const addToCartMutation = useMutation({
+    mutationFn: addToCart,
+    onSuccess: () => {
+      navigate('/cart');
+    },
+    onError: () => {
+      console.log('error')
+    }
+  })
+
+  const handleCartClick = (product) => {
+    addToCartMutation.mutate({
+      userId: user.id,
+      name: product.name,
+      brand: product.brand,
+      category: product.category,
+      price: product.price,
+      image: product.image,
+      quanity: 1
     })
   }
 
@@ -72,17 +122,25 @@ function Mods() {
       </div>
 
       <div className="grid grid-cols-4 gap-x-0  gap-y-10 justify-items-center">
-        {data?.map((product) => (
-          <ProductCard
-            key={product.id}
-            name={product.name}
-            img={product.image}
-            category={product.category}
-            brand={product.brand}
-            price={product.price}
-            onWishlistClick={() => handleWishlist(product)}
-          />
-        ))}
+        {data?.map((product) => {
+          const isWishlisted = wishlist.some(
+            (item) => item.productId === product.id,
+          );
+
+          return (
+            <ProductCard
+              key={product.id}
+              name={product.name}
+              img={product.image}
+              category={product.category}
+              brand={product.brand}
+              price={product.price}
+              isWishlisted={user && isWishlisted}
+              onWishlistClick={() => user && handleWishlist(product)}
+              handleCartClick={() => user && handleCartClick(product)}
+            />
+          );
+        })}
       </div>
     </div>
   );

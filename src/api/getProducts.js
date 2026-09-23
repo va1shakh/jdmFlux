@@ -2,7 +2,7 @@ import axios from "axios";
 
 const API_URL = "http://localhost:3000/products";
 
-export const getProducts = async ({ Dsearch, category, sort }) => {
+export const getProducts = async ({ Dsearch ="", category="all", sort="" }) => {
   const { data } = await axios.get(API_URL);
   let products = [...data];
   const search = Dsearch.trim();

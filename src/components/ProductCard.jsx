@@ -7,6 +7,8 @@ export function ProductCard({
   brand,
   price,
   onWishlistClick,
+  isWishlisted,
+  handleCartClick
 }) {
   return (
     <div className="group relative aspect-square w-70 h-70 overflow-hidden rounded-2xl border border-amber-50 bg-amber-50">
@@ -20,13 +22,23 @@ export function ProductCard({
       <div className="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
       {/* whishlist */}
-      <button
-        type="button"
-        className="absolute right-4 top-4 z-20 cursor-pointer text-white"
-        onClick={onWishlistClick}
-      >
-        <Heart size={24} />
-      </button>
+      {isWishlisted ? (
+        <button
+          type="button"
+          className="absolute right-4 top-4 z-20 cursor-pointer text-white"
+          onClick={onWishlistClick}
+        >
+          <Heart fill="currentColor" size={24} />
+        </button>
+      ) : (
+        <button
+          type="button"
+          className="absolute right-4 top-4 z-20 cursor-pointer text-white"
+          onClick={onWishlistClick}
+        >
+          <Heart size={24} />
+        </button>
+      )}
 
       {/* Hover details */}
       <div
@@ -47,7 +59,7 @@ export function ProductCard({
 
         <button
           type="button"
-          className="h-9 w-30 cursor-pointer rounded-lg bg-[#C6F000] font-medium text-black hover:bg-[#D7FF33]"
+          className="h-9 w-30 cursor-pointer rounded-lg bg-[#C6F000] font-medium text-black hover:bg-[#D7FF33]" onClick={handleCartClick}
         >
           Add to cart
         </button>
