@@ -8,7 +8,7 @@ import {
   useMotionValueEvent,
 } from "motion/react";
 import { NavLink } from "react-router";
-import clsx from 'clsx'
+import clsx from "clsx";
 
 import React, { useRef, useState } from "react";
 
@@ -51,7 +51,7 @@ export const NavBody = ({ children, className, visible }) => {
         boxShadow: visible
           ? "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
           : "none",
-        width: visible ? "40%" : "100%",
+        width: visible ? "50%" : "100%",
         y: visible ? 20 : 0,
       }}
       transition={{
@@ -60,10 +60,10 @@ export const NavBody = ({ children, className, visible }) => {
         damping: 50,
       }}
       style={{
-        minWidth: "800px",
+        minWidth: "1200px",
       }}
       className={cn(
-        "relative z-[60] mx-auto hidden w-full max-w-7xl flex-row items-center justify-between self-start rounded-full bg-transparent px-4 py-2 lg:flex dark:bg-transparent",
+        "relative z-60 mx-auto hidden w-full flex-row items-center justify-between self-start rounded-full bg-transparent px-4 py-4 lg:flex dark:bg-transparent",
         visible && "bg-white/80 dark:bg-neutral-950/80",
         className,
       )}
@@ -80,7 +80,7 @@ export const NavItems = ({ items, className, onItemClick }) => {
     <motion.div
       onMouseLeave={() => setHovered(null)}
       className={cn(
-        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-2 text-sm font-medium text-zinc-600 transition duration-200 hover:text-zinc-800 lg:flex lg:space-x-2",
+        "absolute inset-0 hidden flex-1 flex-row items-center justify-center space-x-2 text-xl font-normal text-zinc-600 transition duration-200 hover:text-zinc-800 lg:flex lg:space-x-2",
         className,
       )}
     >
@@ -185,11 +185,13 @@ export const MobileNavToggle = ({ isOpen, onClick }) => {
 export const NavbarLogo = ({ title, logo }) => {
   return (
     <a
-      href="#"
+      href="/"
       className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
     >
-      <img src={logo} alt="logo" width={30} height={30} />
-      <span className="font-medium text-black dark:text-white">{title}</span>
+      <img src={logo} alt="logo" width={40} height={40} />
+      <span className="font-bold text-xl text-black dark:text-white">
+        {title}
+      </span>
     </a>
   );
 };
@@ -203,7 +205,7 @@ export const NavbarButton = ({
   ...props
 }) => {
   const baseStyles =
-    "px-4 py-2 rounded-md bg-white button bg-white text-black text-sm font-bold relative cursor-pointer hover:-translate-y-0.5 transition duration-200 inline-block text-center";
+    "px-4 py-2 rounded-xl bg-white button bg-white text-black text-xl font-medium relative cursor-pointer hover:-translate-y-0.5 transition duration-200 inline-block text-center";
 
   const variantStyles = {
     primary:

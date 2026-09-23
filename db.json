@@ -1,0 +1,293 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "R34 TE37 Wheels",
+      "desc": "Lightweight forged racing wheels for the Nissan Skyline GT-R R34.",
+      "price": 1599.99,
+      "category": "Wheels",
+      "car": "Nissan Skyline GT-R R34",
+      "brand": "RAYS",
+      "image": "./src/assets/products/r34-wheels.png",
+      "stock": 4,
+      "rating": 5
+    },
+    {
+      "id": "2",
+      "name": "MK5 Exhaust",
+      "desc": "High-flow cat-back exhaust system for the Toyota Supra MK5.",
+      "price": 749.99,
+      "category": "Exhaust",
+      "car": "Toyota Supra MK5",
+      "brand": "HKS",
+      "image": "./src/assets/products/mk5-exhaust.png",
+      "stock": 11,
+      "rating": 4.8
+    },
+    {
+      "id": "3",
+      "name": "Soarer GT Wing",
+      "desc": "Custom GT-style rear wing for the Toyota Soarer Z30.",
+      "price": 329.99,
+      "category": "Spoiler",
+      "car": "Toyota Soarer Z30",
+      "brand": "Origin",
+      "image": "./src/assets/products/z30-spoiler.png",
+      "stock": 8,
+      "rating": 4.7
+    },
+    {
+      "id": "4",
+      "name": "MK4 Racing Wheels",
+      "desc": "Lightweight performance wheels built for the Toyota Supra MK4.",
+      "price": 1499.99,
+      "category": "Wheels",
+      "car": "Toyota Supra MK4",
+      "brand": "RAYS",
+      "image": "./src/assets/products/mk4-wheels.png",
+      "stock": 5,
+      "rating": 5
+    },
+    {
+      "id": "5",
+      "name": "370Z Ducktail Spoiler",
+      "desc": "Aggressive ducktail rear spoiler designed for the Nissan 370Z.",
+      "price": 299.99,
+      "category": "Spoiler",
+      "car": "Nissan 370Z",
+      "brand": "Nismo",
+      "image": "./src/assets/products/370z-spoiler.png",
+      "stock": 12,
+      "rating": 4.7
+    },
+    {
+      "id": "6",
+      "name": "MK3 Performance Exhaust",
+      "desc": "Stainless steel cat-back exhaust system for the Toyota Supra MK3.",
+      "price": 599.99,
+      "category": "Exhaust",
+      "car": "Toyota Supra MK3",
+      "brand": "HKS",
+      "image": "./src/assets/products/mk3-exhaust.png",
+      "stock": 8,
+      "rating": 4.8
+    },
+    {
+      "id": "7",
+      "name": "R35 GT Wing",
+      "desc": "Modern performance rear wing designed for the Nissan GT-R R35.",
+      "price": 549.99,
+      "category": "Spoiler",
+      "car": "Nissan GT-R R35",
+      "brand": "Varis",
+      "image": "./src/assets/products/r35-spoiler.png",
+      "stock": 8,
+      "rating": 4.9
+    },
+    {
+      "id": "8",
+      "name": "Soarer Deep Dish",
+      "desc": "Classic deep-dish wheels designed for the Toyota Soarer Z30.",
+      "price": 1199.99,
+      "category": "Wheels",
+      "car": "Toyota Soarer Z30",
+      "brand": "WORK",
+      "image": "./src/assets/products/z30-wheels.png",
+      "stock": 5,
+      "rating": 4.8
+    },
+    {
+      "id": "9",
+      "name": "MK4 GT Wing",
+      "desc": "High-performance rear wing designed for the Toyota Supra MK4.",
+      "price": 449.99,
+      "category": "Spoiler",
+      "car": "Toyota Supra MK4",
+      "brand": "Varis",
+      "image": "./src/assets/products/mk4-spoiler.png",
+      "stock": 12,
+      "rating": 4.9
+    },
+    {
+      "id": "10",
+      "name": "370Z Racing Wheels",
+      "desc": "Lightweight performance wheels designed for the Nissan 370Z.",
+      "price": 1249.99,
+      "category": "Wheels",
+      "car": "Nissan 370Z",
+      "brand": "WORK",
+      "image": "./src/assets/products/370z-wheels.png",
+      "stock": 7,
+      "rating": 4.8
+    },
+    {
+      "id": "11",
+      "name": "R34 Titanium Exhaust",
+      "desc": "Lightweight titanium performance exhaust for the Nissan Skyline GT-R R34.",
+      "price": 999.99,
+      "category": "Exhaust",
+      "car": "Nissan Skyline GT-R R34",
+      "brand": "HKS",
+      "image": "./src/assets/products/r34-exhaust.png",
+      "stock": 6,
+      "rating": 4.9
+    },
+    {
+      "id": "12",
+      "name": "MK3 GT Wing",
+      "desc": "Aggressive adjustable rear wing designed for the Toyota Supra MK3.",
+      "price": 349.99,
+      "category": "Spoiler",
+      "car": "Toyota Supra MK3",
+      "brand": "AeroWorks",
+      "image": "./src/assets/products/mk3-spoiler.png",
+      "stock": 10,
+      "rating": 4.7
+    },
+    {
+      "id": "13",
+      "name": "R35 Forged Wheels",
+      "desc": "Premium lightweight forged wheels designed for the Nissan GT-R R35.",
+      "price": 1799.99,
+      "category": "Wheels",
+      "car": "Nissan GT-R R35",
+      "brand": "RAYS",
+      "image": "./src/assets/products/r35-wheels.png",
+      "stock": 4,
+      "rating": 5
+    },
+    {
+      "id": "14",
+      "name": "MK5 Street Wing",
+      "desc": "Modern aggressive rear spoiler designed for the Toyota Supra MK5.",
+      "price": 399.99,
+      "category": "Spoiler",
+      "car": "Toyota Supra MK5",
+      "brand": "Varis",
+      "image": "./src/assets/products/mk5-spoiler.png",
+      "stock": 9,
+      "rating": 4.8
+    },
+    {
+      "id": "15",
+      "name": "370Z Cat-Back Exhaust",
+      "desc": "Performance cat-back exhaust system designed for the Nissan 370Z.",
+      "price": 649.99,
+      "category": "Exhaust",
+      "car": "Nissan 370Z",
+      "brand": "HKS",
+      "image": "./src/assets/products/370z-exhaust.png",
+      "stock": 9,
+      "rating": 4.8
+    },
+    {
+      "id": "16",
+      "name": "MK5 Concave Wheels",
+      "desc": "Aggressive lightweight wheels designed for the Toyota Supra MK5.",
+      "price": 1399.99,
+      "category": "Wheels",
+      "car": "Toyota Supra MK5",
+      "brand": "WORK",
+      "image": "./src/assets/products/mk5-wheels.png",
+      "stock": 6,
+      "rating": 4.9
+    },
+    {
+      "id": "17",
+      "name": "R35 Valvetronic Exhaust",
+      "desc": "High-performance valvetronic exhaust system for the Nissan GT-R R35.",
+      "price": 1199.99,
+      "category": "Exhaust",
+      "car": "Nissan GT-R R35",
+      "brand": "HKS",
+      "image": "./src/assets/products/r35-exhaust.png",
+      "stock": 5,
+      "rating": 4.9
+    },
+    {
+      "id": "18",
+      "name": "MK3 Forged Wheels",
+      "desc": "Lightweight forged wheels designed for the Toyota Supra MK3.",
+      "price": 1299.99,
+      "category": "Wheels",
+      "car": "Toyota Supra MK3",
+      "brand": "RAYS",
+      "image": "./src/assets/products/mk3-wheels.png",
+      "stock": 6,
+      "rating": 4.9
+    },
+    {
+      "id": "19",
+      "name": "R34 GT Wing",
+      "desc": "Aggressive adjustable rear wing designed for the Nissan Skyline GT-R R34.",
+      "price": 499.99,
+      "category": "Spoiler",
+      "car": "Nissan Skyline GT-R R34",
+      "brand": "Varis",
+      "image": "./src/assets/products/r34-spoiler.png",
+      "stock": 9,
+      "rating": 5
+    },
+    {
+      "id": "20",
+      "name": "Soarer Exhaust",
+      "desc": "Stainless steel performance exhaust system for the Toyota Soarer Z30.",
+      "price": 579.99,
+      "category": "Exhaust",
+      "car": "Toyota Soarer Z30",
+      "brand": "HKS",
+      "image": "./src/assets/products/z30-exhaust.png",
+      "stock": 10,
+      "rating": 4.8
+    },
+    {
+      "id": "21",
+      "name": "370Z Nismo Wheels",
+      "desc": "Performance-focused lightweight wheels designed for the Nissan 370Z.",
+      "price": 1249.99,
+      "category": "Wheels",
+      "car": "Nissan 370Z",
+      "brand": "Nismo",
+      "image": "./src/assets/products/370z-wheels.png",
+      "stock": 7,
+      "rating": 4.8
+    }
+  ],
+  "wishlist": [
+    {
+      "userId": "f5N76aLTQgg",
+      "productId": "1",
+      "id": "yMXzniGF97c"
+    },
+    {
+      "userId": "f5N76aLTQgg",
+      "productId": "2",
+      "id": "flRdLM4XvxY"
+    },
+    {
+      "userId": "f5N76aLTQgg",
+      "productId": "19",
+      "id": "r_xspqIN9QE"
+    },
+    {
+      "userId": "f5N76aLTQgg",
+      "productId": "16",
+      "id": "bJHHJYXp3_8"
+    },
+    {
+      "userId": "f5N76aLTQgg",
+      "productId": "14",
+      "id": "64Ee2ug26QU"
+    }
+  ],
+  "users": [
+    {
+      "username": "test",
+      "email": "test@gmail.com",
+      "phone": "9999999999",
+      "password": "test123",
+      "id": "f5N76aLTQgg"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
