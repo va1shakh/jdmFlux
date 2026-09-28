@@ -1,6 +1,16 @@
 import { Minus, Plus, Trash2 } from "lucide-react";
 
-function CartItem({ name, brand, category, price, image }) {
+function CartItem({
+  name,
+  brand,
+  category,
+  price,
+  image,
+  quantity,
+  onClickPlus,
+  onClickMinus,
+  onDltCart,
+}) {
   return (
     <div className="flex items-center gap-6 border-b border-zinc-800 py-6">
       {/* Image */}
@@ -16,29 +26,30 @@ function CartItem({ name, brand, category, price, image }) {
 
         <p className="text-sm text-zinc-600">{category}</p>
 
-        <p className="mt-2 font-medium">${price}</p>
+        <p className="mt-2 font-medium">₹{price}</p>
       </div>
 
       {/* Quantity */}
       <div className="flex items-center gap-4 rounded-lg border border-zinc-800 px-3 py-2">
-        <button className="text-zinc-400 transition hover:text-white">
+        <button
+          className="text-zinc-400 transition hover:text-white"
+          onClick={onClickMinus} disabled={quantity === 1}
+        >
           <Minus size={20} />
         </button>
 
-        <span className="w-20 text-center text-sm">quantity</span>
+        <span className="w-20 text-center text-sm">{quantity}</span>
 
-        <button className="text-zinc-400 transition hover:text-white">
+        <button
+          className="text-zinc-400 transition hover:text-white"
+          onClick={onClickPlus}
+        >
           <Plus size={20} />
         </button>
       </div>
 
-      {/* Total */}
-      <div className="w-28 text-right">
-        <p className="font-medium">total</p>
-      </div>
-
       {/* Remove */}
-      <button className="text-zinc-600 transition hover:text-white">
+      <button className="text-zinc-600 transition hover:text-white" onClick={onDltCart}>
         <Trash2 size={20} />
       </button>
     </div>

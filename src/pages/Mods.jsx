@@ -9,8 +9,12 @@ import { getWishlist } from "../api/wishlist/getWishlist";
 import { dltWishlist } from "../api/wishlist/dltWishlist";
 import { addToCart } from "../api/cart/addToCart";
 import { useNavigate } from "react-router";
+import { getCart } from "../api/cart/getCart";
+import { cartQuanityUpdater } from "../api/cart/cartQuanityUpdater";
+import ProductModal from "../components/ProductModal";
 
 function Mods() {
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const [search, setSearch] = useState("");
   const [Dsearch, setDSearch] = useState("");
   const [category, setCategory] = useState("all");
@@ -53,6 +57,10 @@ function Mods() {
     },
   });
   const handleWishlist = (product) => {
+    if(!user){
+      navigate('/login');
+      return;
+    }
     const wishlistItem = wishlist.find((item) => item.productId === product.id);
     if (wishlistItem) {
       dltWishlistMutation.mutate(wishlistItem.id);
@@ -64,27 +72,56 @@ function Mods() {
     }
   };
 
+  const { data: carts = [] } = useQuery({
+    queryKey: ["carts"],
+    queryFn: () => getCart(user.id),
+    enabled: !!user,
+  });
+
   const addToCartMutation = useMutation({
     mutationFn: addToCart,
     onSuccess: () => {
-      navigate('/cart');
+      navigate("/cart");
     },
     onError: () => {
-      console.log('error')
-    }
-  })
+      console.log("error");
+    },
+  });
+
+  const quanityUpdateMutation = useMutation({
+    mutationFn: cartQuanityUpdater,
+    onSuccess: () => {
+      navigate("/cart");
+    },
+    onError: () => {
+      console.log("error");
+    },
+  });
 
   const handleCartClick = (product) => {
-    addToCartMutation.mutate({
-      userId: user.id,
-      name: product.name,
-      brand: product.brand,
-      category: product.category,
-      price: product.price,
-      image: product.image,
-      quanity: 1
-    })
-  }
+    if(!user){
+      navigate('/login');
+      return;
+    }
+    const cartItem = carts.find((cart) => product.id === cart.productId);
+    if (cartItem) {
+      quanityUpdateMutation.mutate({
+        cartId: cartItem.id,
+        quantity: cartItem.quantity + 1,
+      });
+    } else {
+      addToCartMutation.mutate({
+        userId: user.id,
+        name: product.name,
+        brand: product.brand,
+        category: product.category,
+        price: product.price,
+        image: product.image,
+        productId: product.id,
+        quantity: 1,
+      });
+    }
+  };
 
   return (
     <div className="flex flex-col mx-10 min-h-screen gap-4 pb-10">
@@ -136,12 +173,20 @@ function Mods() {
               brand={product.brand}
               price={product.price}
               isWishlisted={user && isWishlisted}
-              onWishlistClick={() => user && handleWishlist(product)}
-              handleCartClick={() => user && handleCartClick(product)}
+              onWishlistClick={() => handleWishlist(product)}
+              handleCartClick={() => handleCartClick(product)}
+              handleCardClick={() => setSelectedProduct(product)}
             />
           );
         })}
       </div>
+      {selectedProduct && (
+        <ProductModal
+          product={selectedProduct}
+          onClose={() => setSelectedProduct(null)}
+          handleCartClick={() => handleCartClick(selectedProduct)}
+        />
+      )}
     </div>
   );
 }

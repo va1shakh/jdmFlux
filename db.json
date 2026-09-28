@@ -4,7 +4,7 @@
       "id": "1",
       "name": "R34 TE37 Wheels",
       "desc": "Lightweight forged racing wheels for the Nissan Skyline GT-R R34.",
-      "price": 1599.99,
+      "price": 185000,
       "category": "Wheels",
       "car": "Nissan Skyline GT-R R34",
       "brand": "RAYS",
@@ -16,7 +16,7 @@
       "id": "2",
       "name": "MK5 Exhaust",
       "desc": "High-flow cat-back exhaust system for the Toyota Supra MK5.",
-      "price": 749.99,
+      "price": 118000,
       "category": "Exhaust",
       "car": "Toyota Supra MK5",
       "brand": "HKS",
@@ -28,7 +28,7 @@
       "id": "3",
       "name": "Soarer GT Wing",
       "desc": "Custom GT-style rear wing for the Toyota Soarer Z30.",
-      "price": 329.99,
+      "price": 52000,
       "category": "Spoiler",
       "car": "Toyota Soarer Z30",
       "brand": "Origin",
@@ -40,7 +40,7 @@
       "id": "4",
       "name": "MK4 Racing Wheels",
       "desc": "Lightweight performance wheels built for the Toyota Supra MK4.",
-      "price": 1499.99,
+      "price": 178000,
       "category": "Wheels",
       "car": "Toyota Supra MK4",
       "brand": "RAYS",
@@ -52,7 +52,7 @@
       "id": "5",
       "name": "370Z Ducktail Spoiler",
       "desc": "Aggressive ducktail rear spoiler designed for the Nissan 370Z.",
-      "price": 299.99,
+      "price": 46500,
       "category": "Spoiler",
       "car": "Nissan 370Z",
       "brand": "Nismo",
@@ -64,7 +64,7 @@
       "id": "6",
       "name": "MK3 Performance Exhaust",
       "desc": "Stainless steel cat-back exhaust system for the Toyota Supra MK3.",
-      "price": 599.99,
+      "price": 98000,
       "category": "Exhaust",
       "car": "Toyota Supra MK3",
       "brand": "HKS",
@@ -76,7 +76,7 @@
       "id": "7",
       "name": "R35 GT Wing",
       "desc": "Modern performance rear wing designed for the Nissan GT-R R35.",
-      "price": 549.99,
+      "price": 87500,
       "category": "Spoiler",
       "car": "Nissan GT-R R35",
       "brand": "Varis",
@@ -88,7 +88,7 @@
       "id": "8",
       "name": "Soarer Deep Dish",
       "desc": "Classic deep-dish wheels designed for the Toyota Soarer Z30.",
-      "price": 1199.99,
+      "price": 148000,
       "category": "Wheels",
       "car": "Toyota Soarer Z30",
       "brand": "WORK",
@@ -100,7 +100,7 @@
       "id": "9",
       "name": "MK4 GT Wing",
       "desc": "High-performance rear wing designed for the Toyota Supra MK4.",
-      "price": 449.99,
+      "price": 73500,
       "category": "Spoiler",
       "car": "Toyota Supra MK4",
       "brand": "Varis",
@@ -112,7 +112,7 @@
       "id": "10",
       "name": "370Z Racing Wheels",
       "desc": "Lightweight performance wheels designed for the Nissan 370Z.",
-      "price": 1249.99,
+      "price": 158000,
       "category": "Wheels",
       "car": "Nissan 370Z",
       "brand": "WORK",
@@ -124,7 +124,7 @@
       "id": "11",
       "name": "R34 Titanium Exhaust",
       "desc": "Lightweight titanium performance exhaust for the Nissan Skyline GT-R R34.",
-      "price": 999.99,
+      "price": 168000,
       "category": "Exhaust",
       "car": "Nissan Skyline GT-R R34",
       "brand": "HKS",
@@ -136,7 +136,7 @@
       "id": "12",
       "name": "MK3 GT Wing",
       "desc": "Aggressive adjustable rear wing designed for the Toyota Supra MK3.",
-      "price": 349.99,
+      "price": 58500,
       "category": "Spoiler",
       "car": "Toyota Supra MK3",
       "brand": "AeroWorks",
@@ -148,7 +148,7 @@
       "id": "13",
       "name": "R35 Forged Wheels",
       "desc": "Premium lightweight forged wheels designed for the Nissan GT-R R35.",
-      "price": 1799.99,
+      "price": 225000,
       "category": "Wheels",
       "car": "Nissan GT-R R35",
       "brand": "RAYS",
@@ -160,7 +160,7 @@
       "id": "14",
       "name": "MK5 Street Wing",
       "desc": "Modern aggressive rear spoiler designed for the Toyota Supra MK5.",
-      "price": 399.99,
+      "price": 68500,
       "category": "Spoiler",
       "car": "Toyota Supra MK5",
       "brand": "Varis",
@@ -172,7 +172,7 @@
       "id": "15",
       "name": "370Z Cat-Back Exhaust",
       "desc": "Performance cat-back exhaust system designed for the Nissan 370Z.",
-      "price": 649.99,
+      "price": 108000,
       "category": "Exhaust",
       "car": "Nissan 370Z",
       "brand": "HKS",
@@ -184,7 +184,7 @@
       "id": "16",
       "name": "MK5 Concave Wheels",
       "desc": "Aggressive lightweight wheels designed for the Toyota Supra MK5.",
-      "price": 1399.99,
+      "price": 172000,
       "category": "Wheels",
       "car": "Toyota Supra MK5",
       "brand": "WORK",
@@ -196,7 +196,7 @@
       "id": "17",
       "name": "R35 Valvetronic Exhaust",
       "desc": "High-performance valvetronic exhaust system for the Nissan GT-R R35.",
-      "price": 1199.99,
+      "price": 198000,
       "category": "Exhaust",
       "car": "Nissan GT-R R35",
       "brand": "HKS",
@@ -208,7 +208,7 @@
       "id": "18",
       "name": "MK3 Forged Wheels",
       "desc": "Lightweight forged wheels designed for the Toyota Supra MK3.",
-      "price": 1299.99,
+      "price": 157000,
       "category": "Wheels",
       "car": "Toyota Supra MK3",
       "brand": "RAYS",
@@ -220,7 +220,7 @@
       "id": "19",
       "name": "R34 GT Wing",
       "desc": "Aggressive adjustable rear wing designed for the Nissan Skyline GT-R R34.",
-      "price": 499.99,
+      "price": 78500,
       "category": "Spoiler",
       "car": "Nissan Skyline GT-R R34",
       "brand": "Varis",
@@ -232,7 +232,7 @@
       "id": "20",
       "name": "Soarer Exhaust",
       "desc": "Stainless steel performance exhaust system for the Toyota Soarer Z30.",
-      "price": 579.99,
+      "price": 92000,
       "category": "Exhaust",
       "car": "Toyota Soarer Z30",
       "brand": "HKS",
@@ -244,7 +244,7 @@
       "id": "21",
       "name": "370Z Nismo Wheels",
       "desc": "Performance-focused lightweight wheels designed for the Nissan 370Z.",
-      "price": 1249.99,
+      "price": 162000,
       "category": "Wheels",
       "car": "Nissan 370Z",
       "brand": "Nismo",
@@ -253,43 +253,99 @@
       "rating": 4.8
     }
   ],
-  "wishlist": [],
+  "wishlist": [
+    {
+      "userId": "AUtxd-pVzl4",
+      "productId": "1",
+      "id": "cMr-0eJvosU"
+    },
+    {
+      "userId": "AUtxd-pVzl4",
+      "productId": "2",
+      "id": "v3l88dgf254"
+    },
+    {
+      "userId": "AUtxd-pVzl4",
+      "productId": "3",
+      "id": "7Mw04v3JUQ0"
+    }
+  ],
   "carts": [
     {
       "userId": "f5N76aLTQgg",
       "name": "R34 TE37 Wheels",
       "brand": "RAYS",
       "category": "Wheels",
-      "price": 1599.99,
+      "price": 185000,
       "image": "./src/assets/products/r34-wheels.png",
-      "id": "nn1p-o97T8k"
+      "productId": "1",
+      "quantity": 2,
+      "id": "du3VSSx874A"
     },
     {
       "userId": "f5N76aLTQgg",
-      "name": "MK4 Racing Wheels",
-      "brand": "RAYS",
-      "category": "Wheels",
-      "price": 1499.99,
-      "image": "./src/assets/products/mk4-wheels.png",
-      "id": "XMs9ZaOatXE"
-    },
-    {
-      "userId": "f5N76aLTQgg",
-      "name": "MK3 Forged Wheels",
-      "brand": "RAYS",
-      "category": "Wheels",
-      "price": 1299.99,
-      "image": "./src/assets/products/mk3-wheels.png",
-      "id": "ZUAzW0IqKgE"
-    },
-    {
-      "userId": "f5N76aLTQgg",
-      "name": "R35 GT Wing",
-      "brand": "Varis",
+      "name": "Soarer GT Wing",
+      "brand": "Origin",
       "category": "Spoiler",
-      "price": 549.99,
-      "image": "./src/assets/products/r35-spoiler.png",
-      "id": "CVekKbWANHE"
+      "price": 52000,
+      "image": "./src/assets/products/z30-spoiler.png",
+      "productId": "3",
+      "quantity": 1,
+      "id": "pFcbUq-7-NI"
+    },
+    {
+      "userId": "AUtxd-pVzl4",
+      "name": "370Z Racing Wheels",
+      "brand": "WORK",
+      "category": "Wheels",
+      "price": 158000,
+      "image": "./src/assets/products/370z-wheels.png",
+      "productId": "10",
+      "quantity": 1,
+      "id": "0Z5XpMarYO0"
+    },
+    {
+      "userId": "AUtxd-pVzl4",
+      "name": "370Z Nismo Wheels",
+      "brand": "Nismo",
+      "category": "Wheels",
+      "price": 162000,
+      "image": "./src/assets/products/370z-wheels.png",
+      "productId": "21",
+      "quantity": 1,
+      "id": "UeVfXJ5i8Ow"
+    }
+  ],
+  "orders": [
+    {
+      "userId": "f5N76aLTQgg",
+      "items": [
+        {
+          "productId": "1",
+          "name": "R34 TE37 Wheels",
+          "quantity": 2,
+          "price": 370000
+        },
+        {
+          "productId": "3",
+          "name": "Soarer GT Wing",
+          "quantity": 1,
+          "price": 52000
+        }
+      ],
+      "shippingAddress": {
+        "fullName": "vaishakh t",
+        "phone": "8989888888",
+        "address": "knr",
+        "city": "kannur",
+        "state": "kerala",
+        "pinCode": "78678"
+      },
+      "subtotal": 422000,
+      "shipping": 0,
+      "total": 422000,
+      "paymentMethod": "cod",
+      "id": "uwWISDgwwx4"
     }
   ],
   "users": [
@@ -299,6 +355,13 @@
       "phone": "9999999999",
       "password": "test123",
       "id": "f5N76aLTQgg"
+    },
+    {
+      "username": "user",
+      "email": "user@gmail.com",
+      "phone": "4759237489",
+      "password": "user123",
+      "id": "AUtxd-pVzl4"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
