@@ -152,6 +152,7 @@ function Login() {
               transition
               hover:bg-white/90
               active:scale-[0.98]
+              cursor-pointer
             "
           >
             Login

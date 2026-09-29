@@ -22,9 +22,9 @@ function CartItem({
       <div className="flex flex-1 flex-col gap-1">
         <h2 className="text-lg font-medium">{name}</h2>
 
-        <p className="text-sm text-zinc-500">{brand}</p>
+        <p className="text-sm text-white/80">{brand}</p>
 
-        <p className="text-sm text-zinc-600">{category}</p>
+        <p className="text-sm text-white/60">{category}</p>
 
         <p className="mt-2 font-medium">₹{price}</p>
       </div>
@@ -32,16 +32,16 @@ function CartItem({
       {/* Quantity */}
       <div className="flex items-center gap-4 rounded-lg border border-zinc-800 px-3 py-2">
         <button
-          className="text-zinc-400 transition hover:text-white"
+          className="text-[#82acff] transition hover:text-[#b1cbff] cursor-pointer"
           onClick={onClickMinus} disabled={quantity === 1}
         >
           <Minus size={20} />
         </button>
 
-        <span className="w-20 text-center text-sm">{quantity}</span>
+        <span className="w-20 text-center text-md">{quantity}</span>
 
         <button
-          className="text-zinc-400 transition hover:text-white"
+          className="text-[#82acff] transition hover:text-[#b1cbff] cursor-pointer"
           onClick={onClickPlus}
         >
           <Plus size={20} />
@@ -49,7 +49,7 @@ function CartItem({
       </div>
 
       {/* Remove */}
-      <button className="text-zinc-600 transition hover:text-white" onClick={onDltCart}>
+      <button className=" cursor-pointer text-[#4a85fb] transition hover:text-[#8eb1f7]" onClick={onDltCart}>
         <Trash2 size={20} />
       </button>
     </div>

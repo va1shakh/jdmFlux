@@ -9,10 +9,10 @@ function ProductModal({ product, onClose, handleCartClick }) {
       <div className="absolute inset-0" onClick={onClose} />
 
       {/* Modal */}
-      <div className="relative z-10 w-full max-w-5xl overflow-hidden rounded-3xl border border-white/10 bg-black text-white shadow-2xl">
+      <div className="relative z-10 w-full max-w-5xl overflow-hidden rounded-3xl bg-[black] text-white shadow-2xl">
         <div className="grid md:grid-cols-2">
           {/* ================= IMAGE ================= */}
-          <div className="relative flex items-center justify-center bg-[#101010]">
+          <div className="relative flex items-center justify-center bg-[#111315]">
             <img
               src={product.image}
               alt={product.name}
@@ -21,32 +21,32 @@ function ProductModal({ product, onClose, handleCartClick }) {
           </div>
 
           {/* ================= INFO ================= */}
-          <div className="relative flex flex-col justify-between p-8 md:p-10">
+          <div className=" bg-[#f8f7f4] relative flex flex-col justify-between p-8 md:p-10">
             {/* close button */}
             <button
               onClick={onClose}
-              className="absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full border border-black/10 bg-black text-white transition hover:bg-white hover:text-black"
+              className="absolute cursor-pointer right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#0057ff] text-white transition hover:bg-[#1e69ff]"
             >
               <X size={18} />
             </button>
             {/* Top */}
             <div>
-              <div className="mb-5 flex items-center gap-3 text-xs uppercase tracking-[0.25em] text-white/40">
+              <div className="mb-5 flex items-center gap-3 text-md uppercase tracking-[0.25em] text-black">
                 <span>{product.category}</span>
-                <span className="h-1 w-1 rounded-full bg-white/30" />
+                <span className="h-1 w-1 rounded-full bg-black/80" />
                 <span>{product.brand}</span>
               </div>
 
-              <h2 className="max-w-md text-3xl font-semibold tracking-tight md:text-4xl">
+              <h2 className="max-w-md text-3xl text-[#0057ff] font-bold tracking-tight md:text-4xl">
                 {product.name}
               </h2>
 
-              <p className="mt-5 max-w-lg text-sm leading-7 text-white/50">
+              <p className="mt-5 max-w-lg text-sm leading-7 text-black">
                 {product.desc}
               </p>
 
               {/* Details */}
-              <div className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-white/10 bg-white/10">
+              <div className="mt-8 grid grid-cols-2 gap-px overflow-hidden bg-[#0057ff]">
                 <Info label="Vehicle" value={product.car} />
                 <Info label="Category" value={product.category} />
                 <Info label="Brand" value={product.brand} />
@@ -72,12 +72,12 @@ function ProductModal({ product, onClose, handleCartClick }) {
                           ? "currentColor"
                           : "none"
                       }
-                      className="text-white"
+                      className="text-black"
                     />
                   ))}
                 </div>
 
-                <span className="text-sm text-white/40">{product.rating}</span>
+                <span className="text-sm text-black/80">{product.rating}</span>
               </div>
             </div>
 
@@ -85,18 +85,18 @@ function ProductModal({ product, onClose, handleCartClick }) {
             <div className="mt-10">
               <div className="mb-6 flex items-end justify-between">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.2em] text-white/30">
+                  <p className="text-xs uppercase tracking-[0.2em] text-black">
                     Price
                   </p>
 
-                  <p className="mt-1 text-3xl font-semibold">
-                    ${product.price.toLocaleString()}
+                  <p className="mt-1 text-[#0057ff] text-3xl font-semibold">
+                    ₹{product.price.toLocaleString()}
                   </p>
                 </div>
 
                 <span
                   className={`text-xs uppercase tracking-widest ${
-                    product.stock > 0 ? "text-white/50" : "text-white/20"
+                    product.stock > 0 ? "text-white" : "text-white"
                   }`}
                 >
                   {product.stock > 0 ? "In Stock" : "Sold Out"}
@@ -106,7 +106,7 @@ function ProductModal({ product, onClose, handleCartClick }) {
               <button
                 onClick={handleCartClick}
                 disabled={product.stock <= 0}
-                className="flex w-full items-center justify-center gap-3 rounded-xl bg-white px-5 py-4 text-sm font-semibold text-black transition hover:bg-white/90 disabled:cursor-not-allowed disabled:bg-white/10 disabled:text-white/20"
+                className="flex w-full items-center justify-center gap-3 rounded-xl bg-[#0057ff] px-5 py-4 text-sm font-semibold text-[#f8f7f4] transition cursor-pointer hover:bg-[#206bff] disabled:cursor-not-allowed disabled:bg-white/10 disabled:text-white/20"
               >
                 <ShoppingCart size={18} />
                 {product.stock > 0 ? "Add to Cart" : "Out of Stock"}
@@ -121,12 +121,12 @@ function ProductModal({ product, onClose, handleCartClick }) {
 
 function Info({ label, value }) {
   return (
-    <div className="bg-black p-5">
-      <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">
+    <div className="bg-[#f8f7f4] p-5">
+      <p className="text-[10px] uppercase tracking-[0.2em] text-[#0057ff]">
         {label}
       </p>
 
-      <p className="mt-2 truncate text-sm text-white/80">{value}</p>
+      <p className="mt-2 truncate text-md text-black">{value}</p>
     </div>
   );
 }

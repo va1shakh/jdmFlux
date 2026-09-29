@@ -1,19 +1,31 @@
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQuery, useMutation, QueryClient, useQueryClient } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import { getWishlist } from "../api/wishlist/getWishlist";
 import { ProductCard } from "../components/ProductCard";
 import { getProducts } from "../api/getProducts";
 import { dltWishlist } from "../api/wishlist/dltWishlist";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { toast } from "sonner";
+import { getCart } from "../api/cart/getCart";
+import { addToCart } from "../api/cart/addToCart";
+import { cartQuanityUpdater } from "../api/cart/cartQuanityUpdater";
 
 function Wishlist() {
   const user = useSelector((state) => state.auth.user);
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const { data: wishlist = [] } = useQuery({
-    queryKey: ["wishlist"],
+    queryKey: ["wishlist", user?.id],
     queryFn: () => getWishlist(user.id),
-    enabled: !!user,
+    enabled: !!user?.id,
   });
+
+  const { data: carts = [] } = useQuery({
+    queryKey: ["carts", user?.id],
+    queryFn: () => getCart(user.id),
+    enabled: !!user?.id
+  })
 
   const { data: products = [] } = useQuery({
     queryKey: ["products"],
@@ -29,8 +41,13 @@ function Wishlist() {
   const dltWishlistMutation = useMutation({
     mutationFn: dltWishlist,
     onSuccess: () => {
-      console.log("removed");
+      queryClient.invalidateQueries({
+        queryKey: ["wishlist", user?.id]
+      })
     },
+    onError: () => {
+      toast.error("Something went wrong");
+    }
   });
 
   const handleWishlist = (product) => {
@@ -38,8 +55,55 @@ function Wishlist() {
     dltWishlistMutation.mutate(wishlistItem.id);
   };
 
+  const addToCartMutation = useMutation({
+    mutationFn: addToCart,
+    onSuccess: () => {
+      navigate("/cart");
+    },
+    onError: () => {
+      toast.error("Something went wrong");
+    },
+  });
+
+  const quanityUpdateMutation = useMutation({
+    mutationFn: cartQuanityUpdater,
+    onSuccess: () => {
+      navigate("/cart");
+    },
+    onError: () => {
+      toast.error("Something went wrong");
+    },
+  });
+
+
+  const handleCartClick = (product) => {
+    if(!user){
+      navigate('/login');
+      return;
+    }
+    const cartItem = carts.find((cart) => product.id === cart.productId);
+    if (cartItem) {
+      quanityUpdateMutation.mutate({
+        cartId: cartItem.id,
+        quantity: cartItem.quantity + 1,
+      });
+    } else {
+      addToCartMutation.mutate({
+        userId: user.id,
+        name: product.name,
+        brand: product.brand,
+        category: product.category,
+        price: product.price,
+        image: product.image,
+        productId: product.id,
+        stock: product.stock,
+        quantity: 1,
+      });
+    }
+  };
+
   return (
-    <div>
+    <div className="min-h-screen bg-black">
       {wishlist.length === 0 ? (
         <div className="flex min-h-[60vh] items-center justify-center">
           {" "}
@@ -66,7 +130,16 @@ function Wishlist() {
           </div>{" "}
         </div>
       ) : (
-        <div className="grid grid-cols-4 gap-x-0  gap-y-10 justify-items-center">
+        <div className="p-10">
+          <div className="mb-10 bg-[#111315] w-70 border-2 border-white/20 rounded-2xl p-5">
+            <h1 className="text-3xl text-[#f8f7f4] font-semibold">Your Wishlist</h1>
+
+            <p className="mt-2 text-sm text-white/80">
+              Your favorite JDM parts
+            </p>
+          </div>
+        <div className="grid grid-cols-4 gap-x-0  gap-y-10 justify-items-center border-2 border-white/20 bg-[#111315] rounded-3xl py-10">
+          
           {wishlistedProducts?.map((product) => {
             return (
               <ProductCard
@@ -78,9 +151,11 @@ function Wishlist() {
                 price={product.price}
                 isWishlisted={true}
                 onWishlistClick={() => user && handleWishlist(product)}
+                handleCartClick={() => handleCartClick(product)}
               />
             );
           })}
+        </div>
         </div>
       )}
     </div>

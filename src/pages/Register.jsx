@@ -22,10 +22,16 @@ function Register() {
     email: "",
     phone: "",
     password: "",
+    cnfrmPassword: ""
   });
   const handleRegister = (e) => {
     e.preventDefault();
-    registerMutation.mutate(formData);
+    if(formData.password === formData.cnfrmPassword){
+      registerMutation.mutate(formData);
+    }
+    else{
+      toast.error("password doesn't match")
+    }
   } 
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-black px-6 text-white">
@@ -210,6 +216,44 @@ function Register() {
             />
           </div>
 
+          {/* confirm Password */}
+          <div>
+            <label
+              htmlFor="password"
+              className="mb-2 block text-sm text-white/60"
+            >
+              Confirm Password
+            </label>
+
+            <input
+              value={formData.cnfrmPassword}
+              onChange={(e) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  cnfrmPassword: e.target.value,
+                }))
+              }
+              minLength={6}
+              maxLength={20}
+              required
+              id="password"
+              type="password"
+              placeholder="••••••••"
+              className="
+                w-full rounded-xl
+                border border-white/10
+                bg-black/20
+                px-4 py-3
+                text-sm text-white
+                outline-none
+                placeholder:text-white/20
+                transition
+                focus:border-white/30
+                focus:bg-white/[0.06]
+              "
+            />
+          </div>
+
           {/* Register */}
           <button
             type="submit"
@@ -222,6 +266,7 @@ function Register() {
               transition
               hover:bg-white/90
               active:scale-[0.98]
+              cursor-pointer
             "
           >
             Register

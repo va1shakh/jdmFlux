@@ -13,7 +13,7 @@ export function ProductCard({
 }) {
   return (
     <div
-      className="group relative aspect-square w-70 overflow-hidden rounded-2xl border border-white/10 bg-zinc-950 shadow-lg cursor-pointer"
+      className="group relative aspect-square w-70 overflow-hidden rounded-2xl border border-white/20 bg-zinc-950 shadow-lg cursor-pointer"
       onClick={handleCardClick}
     >
       {/* Product Image */}
@@ -56,9 +56,7 @@ export function ProductCard({
           {category}
         </p>
 
-        <p className="mt-1 text-sm font-medium text-white">
-          {brand}
-        </p>
+        <p className="mt-1 text-sm font-medium text-white">{brand}</p>
       </div>
 
       {/* Bottom Content */}
@@ -71,9 +69,7 @@ export function ProductCard({
             </h2>
 
             <div className="mt-2 inline-flex rounded-lg bg-black/60 px-3 py-1.5 backdrop-blur-sm">
-              <span className="text-sm font-bold text-white">
-                ₹{price}
-              </span>
+              <span className="text-sm font-bold text-white">₹{price}</span>
             </div>
           </div>
 
@@ -81,11 +77,11 @@ export function ProductCard({
           <button
             type="button"
             className="
-              h-10 shrink-0 rounded-lg
-              bg-[#C6F000] px-4
-              text-sm font-semibold text-black
+              h-10 shrink-0 rounded-lg cursor-pointer
+              bg-[#0057ff] px-4
+              text-sm font-semibold text-[#f8f7f4]
               transition-all duration-200
-              hover:bg-[#D7FF33]
+              hover:bg-[#1462ff]
               hover:scale-[1.03]
               active:scale-95
             "
