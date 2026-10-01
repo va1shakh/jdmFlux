@@ -87,7 +87,7 @@ function MyNavbar() {
           {user ? (
             <div className="flex items-center gap-4 ml-5">
               {/* Avatar */}
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#4b87ff] text-xl font-semibold text-[#f8f7f4]">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#5a0303] text-xl font-semibold text-[#f8f7f4]">
                 {user.username[0].toUpperCase()}
               </div>
 
@@ -95,7 +95,7 @@ function MyNavbar() {
               <span className="text-lg text-[#f8f7f4]">{user.username}</span>
               {/* logout button */}
               <button
-                className="px-4 py-2 rounded-xl bg-[#0057ff] button text-[#f8f7f4] text-xl font-medium relative cursor-pointer hover:-translate-y-0.5 transition duration-200 inline-block text-center"
+                className="px-4 py-2 rounded-xl bg-[#f5f1e8] button text-black text-xl font-medium relative cursor-pointer hover:-translate-y-0.5 transition duration-200 inline-block text-center"
                 onClick={handleLogout}
               >
                 Logout

@@ -4,11 +4,13 @@ import { getCart } from "../api/cart/getCart";
 import { useSelector } from "react-redux";
 import { makeOrder } from "../api/order/makeOrder";
 import Swal from "sweetalert2";
-import { Navigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
+import { toast } from "sonner";
 
 export default function Checkout() {
   const user = useSelector((state) => state.auth.user);
   const [paymentMethod, setPaymentMethod] = useState("cod");
+  const navigate = useNavigate();
 
   const { data: carts = [], isPending } = useQuery({
     queryKey: ["carts"],
@@ -36,14 +38,20 @@ export default function Checkout() {
         title: "Order Successfull !",
         text: `Dear ${user.username} Your order has been placed`,
         icon: "success",
-        iconColor: "#0057ff",
-        color: "#000000",
-        background: "#f8f7f4",
-        theme: "dark",
+        iconColor: "#A3FF12",
+        color: "#f8f7f4",
+        background: "#0D0D0D",
+        showConfirmButton: true,
+        confirmButtonText: "View Order",
+        customClass: {
+          confirmButton:
+            "bg-[#0057ff] text-[#f8f7f4] px-4 py-2 rounded-md font-medium",
+        },
       });
+      navigate("/orders");
     },
     onError: () => {
-      console.log("error");
+      toast.error("Something went wrong");
     },
   });
 
@@ -54,6 +62,9 @@ export default function Checkout() {
       items: carts.map((item) => ({
         productId: item.productId,
         name: item.name,
+        brand: item.brand,
+        category: item.category,
+        image: item.image,
         quantity: item.quantity,
         price: item.price * item.quantity,
       })),
@@ -62,16 +73,18 @@ export default function Checkout() {
       shipping: 0,
       total: totalPrice,
       paymentMethod: paymentMethod,
+      status: "pending",
+      createdAt: new Date().toISOString()
     };
     makeOrderMutation.mutate(orderItem);
   };
 
-  if(!isPending && carts?.length === 0){
-    return <Navigate to="/cart" replace />
+  if (!isPending && carts?.length === 0) {
+    return <Navigate to="/cart" replace />;
   }
 
   return (
-    <div className="min-h-screen bg-[] px-5 py-10 text-[#f8f7f4] sm:px-8 lg:px-12">
+    <div className="min-h-screen px-5 py-10 text-[#f8f7f4]">
       <form onSubmit={handleOrder}>
         <div className="mx-auto max-w-7xl">
           {/* Header */}
@@ -117,7 +130,7 @@ export default function Checkout() {
                         onChange={(e) =>
                           setFormData((prev) => ({
                             ...prev,
-                            fullName: e.target.value
+                            fullName: e.target.value,
                           }))
                         }
                         required
@@ -250,7 +263,7 @@ export default function Checkout() {
                   <label
                     className={` group relative cursor-pointer p-9 transition ${
                       paymentMethod === "cod"
-                        ? "bg-[#0057ff] rounded-2xl text-[#f8f7f4]"
+                        ? "bg-[#740505] rounded-2xl text-[#f8f7f4]"
                         : "rounded-2xl bg-[#20202a]"
                     }`}
                   >
@@ -284,7 +297,7 @@ export default function Checkout() {
                   <label
                     className={`group relative cursor-pointer p-9 transition ${
                       paymentMethod === "online"
-                        ? "bg-[#0057ff] rounded-2xl text-[#f8f7f4]"
+                        ? "bg-[#740505] rounded-2xl text-[#f8f7f4]"
                         : "rounded-2xl bg-[#20202a]"
                     }`}
                   >
@@ -398,7 +411,7 @@ export default function Checkout() {
                 {/* Place Order */}
                 <button
                   type="submit"
-                  className=" cursor-pointer mt-8 flex w-full items-center rounded-2xl justify-between bg-[#0057ff] px-5 py-4 text-sm font-medium uppercase tracking-[0.08em] text-white transition hover:bg-[#1463ff]"
+                  className=" cursor-pointer mt-8 flex w-full items-center rounded-2xl justify-between bg-[#740505] px-5 py-4 text-sm font-medium uppercase tracking-[0.08em] text-white transition hover:bg-[#9a0808]"
                 >
                   <span>Place order</span>
 

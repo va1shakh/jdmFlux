@@ -78,10 +78,10 @@ export function ProductCard({
             type="button"
             className="
               h-10 shrink-0 rounded-lg cursor-pointer
-              bg-[#0057ff] px-4
+              bg-[#5a0303] px-4
               text-sm font-semibold text-[#f8f7f4]
               transition-all duration-200
-              hover:bg-[#1462ff]
+              hover:bg-[#720303]
               hover:scale-[1.03]
               active:scale-95
             "

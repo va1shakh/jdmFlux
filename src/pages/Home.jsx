@@ -3,7 +3,33 @@ import buildImg from "../assets/build.jpg";
 import { ContainerTextFlip } from "../components/text-flip";
 import EchoText from "../components/EchoText";
 import HomeButton from "../components/HomeButton";
+import { ProductCard } from "../components/ProductCard";
+import Slider from "../components/Slider";
+import { useQuery } from "@tanstack/react-query";
+import { getProducts } from "../api/getProducts";
+
 function Home() {
+  const {
+    data: products = [],
+    isLoading,
+    isError,
+  } = useQuery({
+    queryKey: ["products"],
+    queryFn: getProducts,
+  });
+
+  const items = products?.map((product) => ({
+    id: product.id,
+    content: (
+      <ProductCard
+        img={product.image}
+        name={product.name}
+        category={product.category}
+        brand={product.brand}
+        price={product.price}
+      />
+    ),
+  }));
   return (
     <main className="bg-black flex flex-col">
       {/* main highlight */}
@@ -34,7 +60,13 @@ function Home() {
 
       {/* mods highlight */}
       <section className="h-screen bg-black text-white">
-        <h2 className="text-6xl">Mods</h2>
+        <Slider
+          items={items}
+          loop
+          // Match these to your ProductCard size
+          slideClassName="h-[360px] w-[280px]"
+          stageClassName="h-[420px]"
+        />
       </section>
 
       {/* build highlight */}

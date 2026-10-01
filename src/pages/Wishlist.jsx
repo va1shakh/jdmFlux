@@ -1,19 +1,22 @@
-import { useQuery, useMutation, QueryClient, useQueryClient } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
 import { getWishlist } from "../api/wishlist/getWishlist";
 import { ProductCard } from "../components/ProductCard";
 import { getProducts } from "../api/getProducts";
 import { dltWishlist } from "../api/wishlist/dltWishlist";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import { getCart } from "../api/cart/getCart";
 import { addToCart } from "../api/cart/addToCart";
 import { cartQuanityUpdater } from "../api/cart/cartQuanityUpdater";
+import EmptyState from "../components/EmptyState";
+import { Heart } from "lucide-react";
 
 function Wishlist() {
   const user = useSelector((state) => state.auth.user);
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const icon = <Heart />
 
   const { data: wishlist = [] } = useQuery({
     queryKey: ["wishlist", user?.id],
@@ -105,37 +108,14 @@ function Wishlist() {
   return (
     <div className="min-h-screen bg-black">
       {wishlist.length === 0 ? (
-        <div className="flex min-h-[60vh] items-center justify-center">
-          {" "}
-          <div className="flex flex-col items-center text-center">
-            {" "}
-            <div className="mb-5 flex h-20 w-20 items-center justify-center rounded-full border border-zinc-800 bg-zinc-900">
-              {" "}
-              <span className="text-4xl text-zinc-500">♡</span>{" "}
-            </div>{" "}
-            <h2 className="text-2xl font-semibold text-white">
-              {" "}
-              Your wishlist is empty{" "}
-            </h2>{" "}
-            <p className="mt-2 max-w-sm text-zinc-500">
-              {" "}
-              Save your favorite JDM modification parts and they’ll appear here.{" "}
-            </p>{" "}
-            <button
-              className="mt-6 rounded-lg bg-white px-6 py-2.5 text-sm font-medium text-black transition hover:bg-zinc-200"
-            >
-              {" "}
-              <Link to="/mods" >Browse Mods</Link> {" "}
-            </button>{" "}
-          </div>{" "}
-        </div>
+        <EmptyState icon={icon} name="wishlist" />
       ) : (
         <div className="p-10">
           <div className="mb-10 bg-[#111315] w-70 border-2 border-white/20 rounded-2xl p-5">
             <h1 className="text-3xl text-[#f8f7f4] font-semibold">Your Wishlist</h1>
 
             <p className="mt-2 text-sm text-white/80">
-              Your favorite JDM parts
+              Your favorite <span className="font-medium text-lg">{wishlist?.length}</span> JDM parts
             </p>
           </div>
         <div className="grid grid-cols-4 gap-x-0  gap-y-10 justify-items-center border-2 border-white/20 bg-[#111315] rounded-3xl py-10">
