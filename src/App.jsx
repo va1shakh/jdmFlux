@@ -11,15 +11,17 @@ import UserProtected from "./routes/UserProtected";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Orders from "./pages/Orders";
+import Builds from "./pages/Builds";
 
 function App() {
   return (
-    <div className=" bg-black min-h-screen">
+    <div className=" bg-[#000000] min-h-screen">
       <MyNavbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cars" element={<Cars />} />
         <Route path="/mods" element={<Mods />} />
+        <Route path="/builds" element={<Builds/>}/>
 
         <Route element={<GuestRoute />}>
           <Route path="/login" element={<Login />} />

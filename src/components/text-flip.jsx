@@ -46,7 +46,7 @@ export function ContainerTextFlip({
       animate={{ width }}
       transition={{ duration: animationDuration / 2000 }}
       className={cn(
-        "relative inline-block rounded-2xl pt-2 pb-3 text-center text-5xl font-bold text-white",
+        "relative inline-block rounded-2xl pt-2 pb-3 text-center text-5xl tracking-widest uppercase font-bebas text-white/50",
         className
       )}
       key={words[currentWordIndex]}>

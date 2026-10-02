@@ -24,7 +24,7 @@ export function ProductCard({
       />
 
       {/* Dark hover overlay */}
-      <div className="absolute inset-0 bg-black/20 transition-all duration-300 group-hover:bg-black/50" />
+      <div className="absolute inset-0  transition-all duration-300 group-hover:bg-black/50" />
 
       {/* Wishlist */}
       <button
@@ -78,10 +78,10 @@ export function ProductCard({
             type="button"
             className="
               h-10 shrink-0 rounded-lg cursor-pointer
-              bg-[#5a0303] px-4
-              text-sm font-semibold text-[#f8f7f4]
+              bg-[#690828] px-4
+              text-sm font-semibold text-white/90
               transition-all duration-200
-              hover:bg-[#720303]
+              hover:bg-[#8b213f]
               hover:scale-[1.03]
               active:scale-95
             "

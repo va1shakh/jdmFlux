@@ -1,14 +1,46 @@
-import bg from "../assets/bg.mp4";
-import buildImg from "../assets/build.jpg";
-import { ContainerTextFlip } from "../components/text-flip";
-import EchoText from "../components/EchoText";
-import HomeButton from "../components/HomeButton";
 import { ProductCard } from "../components/ProductCard";
-import Slider from "../components/Slider";
 import { useQuery } from "@tanstack/react-query";
 import { getProducts } from "../api/getProducts";
+import useCart from "../hooks/useCart";
+import { useState } from "react";
+import ProductModal from "../components/ProductModal";
+import Hero from "../components/Hero";
+import FeaturedMods from "../components/FeaturedMods";
+import useWishlist from "../hooks/useWishlist";
+import { useSelector } from "react-redux";
 
 function Home() {
+  const user = useSelector((state) => state.auth.user);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const { handleCartClick } = useCart();
+  const { handleWishlist, wishlist } = useWishlist();
+
+  const heroItems = [
+    {
+      id: "look-1",
+      title: "Toyota Supra\nMK-4",
+      image: "/images/mk4.jpg",
+      credit: "BY JDM-Flux",
+      meta: ["WED DEC 17", "7-11 PM", "OSAKA"],
+      accent: "#000000",
+    },
+    {
+      id: "look-2",
+      title: "Nissan\nGT-R35",
+      image: "/images/r35.jpg",
+      meta: ["FRI OCT 24", "6-11 PM", "TOKYO"],
+      accent: "#000000",
+    },
+    {
+      id: "look-3",
+      title: "Toyota GR Supra\nMK-5",
+      image: "/images/mk5.jpg",
+      meta: ["SAT JAN 10", "4-9 PM", "KYOTO"],
+      accent: "#000000",
+    },
+  ];
+
   const {
     data: products = [],
     isLoading,
@@ -18,66 +50,60 @@ function Home() {
     queryFn: getProducts,
   });
 
-  const items = products?.map((product) => ({
-    id: product.id,
-    content: (
-      <ProductCard
-        img={product.image}
-        name={product.name}
-        category={product.category}
-        brand={product.brand}
-        price={product.price}
-      />
-    ),
-  }));
   return (
-    <main className="bg-black flex flex-col">
-      {/* main highlight */}
-      <section className="relative h-screen">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 h-full w-full object-cover"
-        >
-          <source src={bg} type="video/mp4" />
-        </video>
-      </section>
+    <main className="min-h-screen flex flex-col justify-between gap-15">
+      {/* hero */}
+      <Hero heroItems={heroItems} autoplay />
 
-      {/* car highlight */}
-      <section className="h-screen bg-black text-white flex flex-col items-center gap-5">
-        <hr className="w-full" />
-        <div className="flex mt-3">
-          <h1 className="text-5xl px-3 font-normal py-2">Built for</h1>
-          <ContainerTextFlip
-            words={["Toyota", "Nissan", "Mitsubishi", "Honda"]}
+      {/* featured products */}
+      <section>
+        <h2 className="text-center text-4xl font-light tracking-widest text-white/90">
+          Featured <span className="font-normal tracking-tight">Mods</span>
+        </h2>
+        <FeaturedMods>
+          {products?.map((product) => {
+            const isWishlisted = wishlist.some(
+              (item) => item.productId === product.id,
+            );
+
+            return (
+              <ProductCard
+                key={product.id}
+                name={product.name}
+                img={product.image}
+                category={product.category}
+                brand={product.brand}
+                price={product.price}
+                isWishlisted={user && isWishlisted}
+                onWishlistClick={() => handleWishlist(product)}
+                handleCartClick={() => handleCartClick(product)}
+                handleCardClick={() => setSelectedProduct(product)}
+              />
+            );
+          })}
+        </FeaturedMods>
+        {selectedProduct && (
+          <ProductModal
+            product={selectedProduct}
+            onClose={() => setSelectedProduct(null)}
+            handleCartClick={() => handleCartClick(selectedProduct)}
           />
-        </div>
-        <HomeButton size="xl" children="See more" />
-        <hr className="w-full my-4" />
+        )}
       </section>
 
-      {/* mods highlight */}
-      <section className="h-screen bg-black text-white">
-        <Slider
-          items={items}
-          loop
-          // Match these to your ProductCard size
-          slideClassName="h-[360px] w-[280px]"
-          stageClassName="h-[420px]"
-        />
-      </section>
-
-      {/* build highlight */}
-      <section className=" bg-black text-white relative">
-        <img src={buildImg} alt="buildImg" className=" w-full object-cover" />
-        <div className="absolute inset-0 bg-black/90"></div>
-        <div className="absolute inset-0 flex flex-col justify-center items-center gap-10">
-          <EchoText text="Japanese blood" color="#260300" tint="#260300" />
-          <HomeButton size="xl" children="See builds" />
+      {/* footer */}
+      <div className="flex items-end justify-between bg-white/5 px-8 py-4 text-white/40">
+        <div className="flex flex-col gap-1">
+          <h1 className="text-lg font-bold tracking-[0.2em] text-white/70">
+            JDM FLUX
+          </h1>
+          <p className="text-sm text-white/50">Japanese blood. Racing soul.</p>
         </div>
-      </section>
+        <div className="flex flex-col items-end gap-1 text-xs tracking-wide">
+          <p className="text-white/50">Built for the JDM culture.</p>
+          <p>© 2026 JDMFLUX</p>
+        </div>
+      </div>
     </main>
   );
 }

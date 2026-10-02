@@ -1,19 +1,13 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { SearchBar } from "../components/SearchBar";
 import { getProducts } from "../api/getProducts";
 import { ProductCard } from "../components/ProductCard";
 import { useEffect, useState } from "react";
-import { addWishlist } from "../api/wishlist/addWishlist";
-import { useSelector } from "react-redux";
-import { getWishlist } from "../api/wishlist/getWishlist";
-import { dltWishlist } from "../api/wishlist/dltWishlist";
-import { addToCart } from "../api/cart/addToCart";
+import { useSelector } from "react-redux"; 
 import { useNavigate } from "react-router";
-import { getCart } from "../api/cart/getCart";
-import { cartQuanityUpdater } from "../api/cart/cartQuanityUpdater";
 import ProductModal from "../components/ProductModal";
-import { toast } from "sonner";
 import useCart from "../hooks/useCart";
+import useWishlist from "../hooks/useWishlist";
+import { useQuery } from "@tanstack/react-query";
 
 function Mods() {
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -22,10 +16,9 @@ function Mods() {
   const [category, setCategory] = useState("all");
   const [sort, setSort] = useState("");
   const user = useSelector((state) => state.auth.user);
-  const navigate = useNavigate();
-  const queryClient = useQueryClient();
 
   const {handleCartClick} = useCart();
+  const {handleWishlist, wishlist} = useWishlist();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -39,53 +32,8 @@ function Mods() {
     queryFn: () => getProducts({ Dsearch, category, sort }),
   });
 
-  const { data: wishlist = [] } = useQuery({
-    queryKey: ["wishlist", user?.id],
-    queryFn: () => getWishlist(user.id),
-    enabled: !!user?.id,
-  });
-
-  const wishlistMutation = useMutation({
-    mutationFn: addWishlist,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["wishlist", user?.id]
-      })
-    },
-    onError: () => {
-      toast.error("Something went wrong");
-    },
-  });
-
-  const dltWishlistMutation = useMutation({
-    mutationFn: dltWishlist,
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["wishlist", user?.id]
-      })
-    },
-    onError: () => {
-      toast.error("Something went wrong");
-    }
-  });
-  const handleWishlist = (product) => {
-    if(!user){
-      navigate('/login');
-      return;
-    }
-    const wishlistItem = wishlist.find((item) => item.productId === product.id);
-    if (wishlistItem) {
-      dltWishlistMutation.mutate(wishlistItem.id);
-    } else {
-      wishlistMutation.mutate({
-        userId: user?.id,
-        productId: product.id,
-      });
-    }
-  };
-
   return (
-    <div className="flex bg-black flex-col mx-10 min-h-screen gap-4 pb-10">
+    <div className="flex bg-[#01080c] rounded-2xl flex-col mx-10 min-h-screen gap-4 pb-10">
       <div className=" p-5 rounded-2xl">
       {/* search bar */}
       <div className="flex justify-between gap-10 my-4 ">
