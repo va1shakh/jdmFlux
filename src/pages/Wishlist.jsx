@@ -111,19 +111,20 @@ function Wishlist() {
         <EmptyState icon={icon} name="wishlist" />
       ) : (
         <div className="p-10">
-          <div className="mb-10 bg-[#111315] w-70 border-2 border-white/20 rounded-2xl p-5">
+          <div className="mb-10 bg-[#1d2024] w-70  rounded-2xl p-5">
             <h1 className="text-3xl text-[#f8f7f4] font-semibold">Your Wishlist</h1>
 
             <p className="mt-2 text-sm text-white/80">
               Your favorite <span className="font-medium text-lg">{wishlist?.length}</span> JDM parts
             </p>
           </div>
-        <div className="grid grid-cols-4 gap-x-0  gap-y-10 justify-items-center border-2 border-white/20 bg-[#111315] rounded-3xl py-10">
+        <div className="grid grid-cols-4 gap-x-0  gap-y-10  justify-items-center bg-[#1d2024] rounded-3xl py-10">
           
           {wishlistedProducts?.map((product) => {
             return (
               <ProductCard
                 key={product.id}
+                stock={product.stock}
                 name={product.name}
                 img={product.image}
                 category={product.category}

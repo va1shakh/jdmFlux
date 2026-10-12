@@ -27,7 +27,15 @@ function Register() {
   const handleRegister = (e) => {
     e.preventDefault();
     if(formData.password === formData.cnfrmPassword){
-      registerMutation.mutate(formData);
+      registerMutation.mutate({
+        role: "customer",
+        status: "active",
+        username: formData.username.toLowerCase(),
+        email: formData.email,
+        phone: formData.phone,
+        password: formData.password,
+        createdAt: new Date().toIsoString()
+      });
     }
     else{
       toast.error("password doesn't match")

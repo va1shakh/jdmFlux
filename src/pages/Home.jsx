@@ -4,7 +4,7 @@ import { getProducts } from "../api/getProducts";
 import useCart from "../hooks/useCart";
 import { useState } from "react";
 import ProductModal from "../components/ProductModal";
-import Hero from "../components/Hero";
+import {Hero} from "../components/Hero";
 import FeaturedMods from "../components/FeaturedMods";
 import useWishlist from "../hooks/useWishlist";
 import { useSelector } from "react-redux";
@@ -51,13 +51,13 @@ function Home() {
   });
 
   return (
-    <main className="min-h-screen flex flex-col justify-between gap-15">
+    <main className="min-h-screen flex flex-col justify-between gap-10">
       {/* hero */}
-      <Hero heroItems={heroItems} autoplay />
+      <Hero bgColor="bg-black" />
 
       {/* featured products */}
-      <section>
-        <h2 className="text-center text-4xl font-light tracking-widest text-white/90">
+      <section className=" mt-5 mx-8 border-b-2  border-b-white/20 ">
+        <h2 className="text-center text-4xl mb-14 font-light tracking-widest text-white/90">
           Featured <span className="font-normal tracking-tight">Mods</span>
         </h2>
         <FeaturedMods>
@@ -67,18 +67,20 @@ function Home() {
             );
 
             return (
-              <ProductCard
-                key={product.id}
-                name={product.name}
-                img={product.image}
-                category={product.category}
-                brand={product.brand}
-                price={product.price}
-                isWishlisted={user && isWishlisted}
-                onWishlistClick={() => handleWishlist(product)}
-                handleCartClick={() => handleCartClick(product)}
-                handleCardClick={() => setSelectedProduct(product)}
-              />
+              <div key={product.id} className="w-1/3 shrink-0 px-0">
+                <ProductCard
+                  name={product.name}
+                  img={product.image}
+                  category={product.category}
+                  brand={product.brand}
+                  price={product.price}
+                  stock={product.stock}
+                  isWishlisted={user && isWishlisted}
+                  onWishlistClick={() => handleWishlist(product)}
+                  handleCartClick={() => handleCartClick(product)}
+                  handleCardClick={() => setSelectedProduct(product)}
+                />
+              </div>
             );
           })}
         </FeaturedMods>
@@ -92,7 +94,7 @@ function Home() {
       </section>
 
       {/* footer */}
-      <div className="flex items-end justify-between bg-white/5 px-8 py-4 text-white/40">
+      <div className="flex items-end justify-between bg-black/70 px-8 py-4 text-white/40">
         <div className="flex flex-col gap-1">
           <h1 className="text-lg font-bold tracking-[0.2em] text-white/70">
             JDM FLUX

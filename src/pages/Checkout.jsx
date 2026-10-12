@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { getCart } from "../api/cart/getCart";
 import { useSelector } from "react-redux";
@@ -6,11 +6,13 @@ import { makeOrder } from "../api/order/makeOrder";
 import Swal from "sweetalert2";
 import { Navigate, useNavigate } from "react-router";
 import { toast } from "sonner";
+import axios from "axios";
 
 export default function Checkout() {
   const user = useSelector((state) => state.auth.user);
   const [paymentMethod, setPaymentMethod] = useState("cod");
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const { data: carts = [], isPending } = useQuery({
     queryKey: ["carts"],
@@ -31,24 +33,36 @@ export default function Checkout() {
     pinCode: "",
   });
 
+  const entireDeleteCartMutation = useMutation({
+    mutationFn: async () => {
+      await Promise.all(
+        carts.map((item) =>
+          axios.delete(`http://localhost:3000/carts/${item.id}`),
+        ),
+      );
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["carts"]
+      })
+    }
+  });
+
   const makeOrderMutation = useMutation({
     mutationFn: makeOrder,
     onSuccess: () => {
       Swal.fire({
         title: "Order Successfull !",
-        text: `Dear ${user.username} Your order has been placed`,
+        text: `Dear ${user.username} your order has been placed`,
         icon: "success",
         iconColor: "#A3FF12",
         color: "#f8f7f4",
-        background: "#0D0D0D",
+        background: "#1a1a1a",
         showConfirmButton: true,
         confirmButtonText: "View Order",
-        customClass: {
-          confirmButton:
-            "bg-[#0057ff] text-[#f8f7f4] px-4 py-2 rounded-md font-medium",
-        },
       });
       navigate("/orders");
+      entireDeleteCartMutation.mutate();
     },
     onError: () => {
       toast.error("Something went wrong");
@@ -74,7 +88,7 @@ export default function Checkout() {
       total: totalPrice,
       paymentMethod: paymentMethod,
       status: "pending",
-      createdAt: new Date().toISOString()
+      createdAt: new Date().toISOString(),
     };
     makeOrderMutation.mutate(orderItem);
   };

@@ -10,30 +10,29 @@ import { logout } from "./redux/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Heart, ShoppingCart, Package } from "lucide-react";
 import { NavLink } from "react-router";
-import { useQuery } from "@tanstack/react-query";
-import { getWishlist } from "./api/wishlist/getWishlist";
 import Badge from "@mui/material/Badge";
-import { getCart } from "./api/cart/getCart";
+import ConfirmDialog from "./components/ConfirmDialog";
+import { useGetWishlist } from "./hooks/useGetWishlist";
+import { useGetCart } from "./hooks/useGetCarts";
+import { useGetUserInfo } from "./hooks/useGetUserInfo";
 
 function MyNavbar() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+
   const handleLogout = () => {
     dispatch(logout());
     localStorage.removeItem("user");
   };
-  const { data } = useQuery({
-    queryKey: ["wishlist", user?.id],
-    queryFn: () => getWishlist(user.id),
-    enabled: !!user,
-  });
-  const wishlistCount = data?.length;
 
-  const { data: carts = [] } = useQuery({
-    queryKey: ["carts"],
-    queryFn: () => getCart(user.id),
-    enabled: !!user
-  })
+  const { data: userInfo = {} } = useGetUserInfo();
+
+  const { data: wishlists = [] } = useGetWishlist();
+
+  const wishlistCount = wishlists?.length;
+
+  const { data: carts = [] } = useGetCart();
+  console.log(userInfo);
 
   const cartCount = carts?.length;
 
@@ -43,16 +42,16 @@ function MyNavbar() {
       link: "/",
     },
     {
-      name: "Cars",
-      link: "/cars",
-    },
-    {
       name: "Mods",
       link: "/mods",
     },
     {
       name: "Builds",
       link: "/builds",
+    },
+    {
+      name: "About",
+      link: "/about",
     },
   ];
 
@@ -65,7 +64,7 @@ function MyNavbar() {
 
         <div className="relative z-20 ml-auto flex items-center gap-3">
           {/* wishlist-cart-orders */}
-          {user && (
+          {user?.role === 'customer' && (
             <div className="flex items-center gap-7">
               <NavLink to="/wishlist" title="Wishlist">
                 <Badge badgeContent={wishlistCount} color="primary">
@@ -74,7 +73,7 @@ function MyNavbar() {
               </NavLink>
 
               <NavLink to="/cart" title="Cart">
-                <Badge badgeContent={cartCount} color="secondary" >
+                <Badge badgeContent={cartCount} color="secondary">
                   <ShoppingCart color="#ffffff" size={20} />
                 </Badge>
               </NavLink>
@@ -84,22 +83,29 @@ function MyNavbar() {
               </NavLink>
             </div>
           )}
-          {user ? (
+          {user?.role === 'customer' ? (
             <div className="flex items-center gap-4 ml-5">
               {/* Avatar */}
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#5a0303] text-xl font-semibold text-[#f8f7f4]">
-                {user.username[0].toUpperCase()}
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#0057ff] text-xl font-semibold text-[#f8f7f4]">
+                {userInfo?.username?.[0]?.toUpperCase()}
               </div>
 
               {/* Username */}
-              <span className="text-lg text-[#f8f7f4]">{user.username}</span>
+              <span className="text-lg text-white/90">
+                {userInfo?.username}
+              </span>
               {/* logout button */}
-              <button
-                className="px-4 py-2 rounded-xl bg-[#f5f1e8] button text-black text-xl font-medium relative cursor-pointer hover:-translate-y-0.5 transition duration-200 inline-block text-center"
-                onClick={handleLogout}
-              >
-                Logout
-              </button>
+              <ConfirmDialog
+                trigger={
+                  <button className="px-4 py-2 rounded-xl bg-[#0057ff] button text-white/90 text-xl font-medium relative cursor-pointer hover:-translate-y-0.5 transition duration-200 inline-block text-center">
+                    Logout
+                  </button>
+                }
+                title="Logout"
+                description="Are you sure want to logout ?"
+                confirmText="Logout"
+                onConfirm={handleLogout}
+              />
             </div>
           ) : (
             <>

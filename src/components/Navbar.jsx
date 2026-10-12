@@ -64,7 +64,7 @@ export const NavBody = ({ children, className, visible }) => {
       }}
       className={cn(
         "relative z-60 mx-auto hidden w-full flex-row items-center justify-between self-start rounded-full bg-transparent px-4 py-4 lg:flex dark:bg-transparent",
-        visible && "bg-white/80 dark:bg-[#a90b48]/8",
+        visible && "bg-black dark:bg-black/20",
         className,
       )}
     >
@@ -101,7 +101,7 @@ export const NavItems = ({ items, className, onItemClick }) => {
           {hovered === idx && (
             <motion.div
               layoutId="hovered"
-              className="absolute inset-0 h-full w-full rounded-full bg-gray-100 dark:bg-neutral-800"
+              className="absolute inset-0 h-full w-full rounded-full bg-black dark:bg-blue-200/20"
             />
           )}
           <span className="relative z-20">{item.name}</span>

@@ -3,7 +3,6 @@ import { getProducts } from "../api/getProducts";
 import { ProductCard } from "../components/ProductCard";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux"; 
-import { useNavigate } from "react-router";
 import ProductModal from "../components/ProductModal";
 import useCart from "../hooks/useCart";
 import useWishlist from "../hooks/useWishlist";
@@ -27,13 +26,14 @@ function Mods() {
     return () => clearTimeout(timer);
   }, [search]);
 
-  const { data, isLoading, isError } = useQuery({
+  const { data: products = [], isLoading, isError } = useQuery({
     queryKey: ["products", Dsearch, category, sort],
     queryFn: () => getProducts({ Dsearch, category, sort }),
   });
 
+
   return (
-    <div className="flex bg-[#01080c] rounded-2xl flex-col mx-10 min-h-screen gap-4 pb-10">
+    <div className="flex rounded-2xl flex-col mx-10 min-h-screen gap-4 pb-10 mt-10">
       <div className=" p-5 rounded-2xl">
       {/* search bar */}
       <div className="flex justify-between gap-10 my-4 ">
@@ -47,9 +47,9 @@ function Mods() {
           />
         </div>
         {/* Filter + Sort */}
-        <div className="flex gap-3">
+        <div className="flex gap-3 mr-15">
           <select
-            className="px-5 py-2.5 rounded-lg border-2 border-white/20 outline-none bg-black text-white"
+            className="px-5 py-2.5 rounded-lg outline-none bg-white/13 focus:bg-black text-white/90"
             onChange={(e) => setCategory(e.target.value)}
           >
             <option value="all">All</option>
@@ -59,7 +59,7 @@ function Mods() {
           </select>
 
           <select
-            className="px-1 mx-5 py-2.5 rounded-lg bg-black border-2 border-white/20 outline-none  text-white"
+            className="px-1 mx-5 py-2.5 rounded-lg bg-white/13 focus:bg-black outline-none  text-white/90"
             onChange={(e) => setSort(e.target.value)}
           >
             <option value="">Sort</option>
@@ -69,8 +69,8 @@ function Mods() {
         </div>
       </div>
 
-      <div className="grid grid-cols-4 gap-x-0  gap-y-10 my-9 justify-items-center">
-        {data?.map((product) => {
+      <div className="grid grid-cols-3 gap-x-0  gap-y-20 my-10 justify-items-center">
+        {products?.map((product) => {
           const isWishlisted = wishlist.some(
             (item) => item.productId === product.id,
           );
@@ -83,6 +83,7 @@ function Mods() {
               category={product.category}
               brand={product.brand}
               price={product.price}
+              stock={product.stock}
               isWishlisted={user && isWishlisted}
               onWishlistClick={() => handleWishlist(product)}
               handleCartClick={() => handleCartClick(product)}

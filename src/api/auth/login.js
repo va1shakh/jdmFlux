@@ -6,5 +6,8 @@ export const login = async ({ email, password }) => {
     if(res.data.length === 0){
         throw new Error("Incorrect email or password");
     }
-    else return res.data[0];
+    if(res.data[0].status === 'blocked'){
+        throw new Error("You are blocked :(");
+    }
+    return res.data[0];
 }

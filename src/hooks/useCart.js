@@ -20,10 +20,10 @@ function useCart(){
    const addToCartMutation = useMutation({
     mutationFn: addToCart,
     onSuccess: () => {
+      toast.success("Item added to the cart");
         queryClient.invalidateQueries({
             queryKey: ["carts"]
         })
-      navigate("/cart");
     },
     onError: () => {
       toast.error("Something went wrong");
@@ -33,7 +33,7 @@ function useCart(){
   const quanityUpdateMutation = useMutation({
     mutationFn: cartQuanityUpdater,
     onSuccess: () => {
-      navigate("/cart");
+      toast.success("Added 1 more to cart");
     },
     onError: () => {
       toast.error("Something went wrong");
@@ -41,7 +41,7 @@ function useCart(){
   });
 
   const handleCartClick = (product) => {
-    if(!user){
+    if(!user || user.role === 'admin'){
       navigate('/login');
       return;
     }

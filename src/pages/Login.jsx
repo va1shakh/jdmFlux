@@ -17,25 +17,32 @@ function Login() {
     onSuccess: (user) => {
       const userData = {
         id: user.id,
-        username: user.username,
-        email: user.email
+        role: user.role
       };
-      dispatch(setUser(userData));
-      localStorage.setItem("user", JSON.stringify(userData));
-      navigate('/mods');
+
+      if (user.role === "customer") {
+        dispatch(setUser(userData));
+        localStorage.setItem("user", JSON.stringify(userData));
+        navigate("/mods");
+      }
+      else if(user.role === 'admin'){
+        dispatch(setUser(userData));
+        localStorage.setItem("user", JSON.stringify(userData));
+        navigate("/admin");
+      }
     },
     onError: (error) => {
       toast.error(error.message);
-    }
-  })
+    },
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     loginMutation.mutate({
       email: email,
-      password: password
-    })
-  }
+      password: password,
+    });
+  };
 
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-black px-6 text-white">

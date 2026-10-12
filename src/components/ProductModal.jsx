@@ -4,7 +4,7 @@ function ProductModal({ product, onClose, handleCartClick }) {
   if (!product) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-md">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-md">
       {/* Overlay */}
       <div className="absolute inset-0" onClick={onClose} />
 
@@ -12,7 +12,7 @@ function ProductModal({ product, onClose, handleCartClick }) {
       <div className="relative z-10 w-full max-w-5xl overflow-hidden rounded-3xl bg-[black] text-white shadow-2xl">
         <div className="grid md:grid-cols-2">
           {/* ================= IMAGE ================= */}
-          <div className="relative flex items-center justify-center bg-white/10">
+          <div className="relative flex items-center justify-center bg-black">
             <img
               src={product.image}
               alt={product.name}
@@ -21,11 +21,11 @@ function ProductModal({ product, onClose, handleCartClick }) {
           </div>
 
           {/* ================= INFO ================= */}
-          <div className=" bg-[#f5e8e8] relative flex flex-col justify-between p-8 md:p-10">
+          <div className=" bg-[#f8f7f4] relative flex flex-col justify-between p-8 md:p-10">
             {/* close button */}
             <button
               onClick={onClose}
-              className="absolute cursor-pointer right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#5a0303] text-white transition hover:bg-[#8f0707]"
+              className="absolute cursor-pointer right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full bg-[#0057ff] text-[#f8f7f4] transition hover:bg-[#3275fb]"
             >
               <X size={18} />
             </button>
@@ -37,7 +37,7 @@ function ProductModal({ product, onClose, handleCartClick }) {
                 <span>{product.brand}</span>
               </div>
 
-              <h2 className="max-w-md text-3xl text-[#5a0303] font-bold tracking-tight md:text-4xl">
+              <h2 className="max-w-md text-3xl text-[#0057ff] font-bold tracking-tight md:text-4xl">
                 {product.name}
               </h2>
 
@@ -72,7 +72,7 @@ function ProductModal({ product, onClose, handleCartClick }) {
                           ? "currentColor"
                           : "none"
                       }
-                      className="text-black"
+                      className="text-black/90"
                     />
                   ))}
                 </div>
@@ -89,7 +89,7 @@ function ProductModal({ product, onClose, handleCartClick }) {
                     Price
                   </p>
 
-                  <p className="mt-1 text-[#5a0303] text-3xl font-semibold">
+                  <p className="mt-1 text-[#0057ff] text-3xl font-semibold">
                     ₹{product.price.toLocaleString()}
                   </p>
                 </div>
@@ -106,7 +106,7 @@ function ProductModal({ product, onClose, handleCartClick }) {
               <button
                 onClick={handleCartClick}
                 disabled={product.stock <= 0}
-                className="flex w-full items-center justify-center gap-3 rounded-xl bg-[#5a0303] px-5 py-4 text-sm font-semibold text-[#f8f7f4] transition cursor-pointer hover:bg-[#7e0505] disabled:cursor-not-allowed disabled:bg-white/10 disabled:text-white/20"
+                className="flex w-full items-center justify-center gap-3 rounded-xl bg-[#0057ff] px-5 py-4 text-sm font-semibold text-[#f8f7f4] transition cursor-pointer hover:bg-[#0049da] disabled:cursor-not-allowed disabled:bg-white/10 disabled:text-white/20"
               >
                 <ShoppingCart size={18} />
                 {product.stock > 0 ? "Add to Cart" : "Out of Stock"}
@@ -121,8 +121,8 @@ function ProductModal({ product, onClose, handleCartClick }) {
 
 function Info({ label, value }) {
   return (
-    <div className="bg-[#f5e8e8] p-5">
-      <p className="text-[10px] uppercase tracking-[0.2em] text-[#5a0303]">
+    <div className="bg-[#eaf1ff] p-5">
+      <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#0057ff]">
         {label}
       </p>
 

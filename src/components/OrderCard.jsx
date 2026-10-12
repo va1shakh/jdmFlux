@@ -1,3 +1,4 @@
+import ConfirmDialog from "./ConfirmDialog";
 import OrderProductItem from "./OrderProductItem";
 
 function OrderCard({ order, handleCancel }) {
@@ -26,12 +27,18 @@ function OrderCard({ order, handleCancel }) {
             </p>
           </div>
 
-          <button
-            className="rounded-xl bg-[#6d0707] hover:bg-[#960707] px-3 py-2 cursor-pointer text-sm font-semibold uppercase tracking-[0.16em] text-white"
-            onClick={() => handleCancel(order.id)}
-          >
-            Cancel
-          </button>
+          <ConfirmDialog
+            trigger={
+              <button className="rounded-xl bg-[#0057ff] hover:bg-[#1b67ff] px-3 py-2 cursor-pointer text-sm font-semibold uppercase tracking-[0.16em] text-white">
+                Cancel
+              </button>
+            }
+            title="Cancel"
+            description="Are you sure to cancel the order ?"
+            notConfirmText="No"
+            confirmText="Cancel"
+            onConfirm={() => handleCancel(order.id)}
+          />
         </div>
       </header>
 
