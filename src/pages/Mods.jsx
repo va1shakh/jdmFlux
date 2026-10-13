@@ -1,12 +1,12 @@
 import { SearchBar } from "../components/SearchBar";
-import { getProducts } from "../api/getProducts";
 import { ProductCard } from "../components/ProductCard";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux"; 
 import ProductModal from "../components/ProductModal";
 import useCart from "../hooks/useCart";
 import useWishlist from "../hooks/useWishlist";
-import { useQuery } from "@tanstack/react-query";
+import { useGetProducts } from "../hooks/useGetProducts";
+import { filterProducts } from "../api/filterProducts";
 
 function Mods() {
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -26,10 +26,8 @@ function Mods() {
     return () => clearTimeout(timer);
   }, [search]);
 
-  const { data: products = [], isLoading, isError } = useQuery({
-    queryKey: ["products", Dsearch, category, sort],
-    queryFn: () => getProducts({ Dsearch, category, sort }),
-  });
+  const { data: products = [], isLoading, isError } = useGetProducts();
+  const filteredProducts = filterProducts({products, Dsearch, category, sort })
 
 
   return (
@@ -70,7 +68,7 @@ function Mods() {
       </div>
 
       <div className="grid grid-cols-3 gap-x-0  gap-y-20 my-10 justify-items-center">
-        {products?.map((product) => {
+        {filteredProducts?.map((product) => {
           const isWishlisted = wishlist.some(
             (item) => item.productId === product.id,
           );

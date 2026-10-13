@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Users,
   UserCheck,
@@ -11,26 +11,21 @@ import {
 } from "lucide-react";
 import { UserCard } from "../components/UserCard";
 import { useGetUsers } from "../hooks/useGetUsers";
+import { useDebouncing } from "../hooks/useDebouncing";
+import { filter_sort_users } from "../api/filter_sort_users";
 
 export function UsersPage() {
   const [search, setSearch] = useState("");
-  const [debSearch, setDebSearch] = useState("");
   const [filter, setFilter] = useState("all");
   const [sort, setSort] = useState("newest");
 
   // debouncing
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebSearch(search);
-    }, 1000);
-    return () => clearTimeout(timer);
-  }, [search]);
+  const debSearch = useDebouncing({ search, delay: 500 });
 
-  const {
-    data: users = [],
-    isLoading,
-    error,
-  } = useGetUsers({ debSearch, filter, sort });
+  const { data: users = [], isLoading, error } = useGetUsers();
+
+  //filterd Sorted Users
+  const filteredUsers = filter_sort_users({ users, debSearch, filter, sort });
 
   const stats = [
     {
@@ -54,7 +49,7 @@ export function UsersPage() {
   const [page, setPage] = useState(1);
   const pageSize = 8;
   const totalPages = Math.ceil(users?.length / pageSize);
-  const paginatedUsers = users?.slice((page - 1) * pageSize, page * pageSize);
+  const paginatedUsers = filteredUsers?.slice((page - 1) * pageSize, page * pageSize);
 
   return (
     <section className="w-full min-w-0 space-y-6 text-slate-900 py-6">
@@ -159,12 +154,11 @@ export function UsersPage() {
           <p className="text-sm text-slate-500">
             Showing{" "}
             <span className="font-medium text-slate-800">
-              {/* {paginatedUsers.length === 0 ? 0 : startIndex + 1}–
-              {Math.min(startIndex + PAGE_SIZE, filteredUsers.length)} */}
+              {page}
             </span>{" "}
             of{" "}
             <span className="font-medium text-slate-800">
-              {/* {filteredUsers.length} */}
+              {filteredUsers.length}
             </span>{" "}
             users
           </p>

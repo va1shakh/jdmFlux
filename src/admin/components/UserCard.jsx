@@ -1,6 +1,7 @@
 import { Ban, ShieldCheck, Trash2 } from "lucide-react";
 import { useBlockUser } from "../hooks/useBlockUser";
 import { clsx } from "clsx";
+import { useDltUser } from "../hooks/useDltUser";
 
 function StatusBadge({ status }) {
   return (
@@ -24,6 +25,7 @@ function StatusBadge({ status }) {
 export function UserCard({ user }) {
   const id = user.id;
   const handleBlock = useBlockUser();
+  const handleDltUser = useDltUser();
 
   return (
     <article className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:border-slate-300">
@@ -74,6 +76,7 @@ export function UserCard({ user }) {
 
         <button
           type="button"
+          onClick={() => handleDltUser(id)}
           className="inline-flex items-center gap-1.5 rounded-lg border px-3 py-2 text-xs font-medium transition hover:bg-red-200/40 border-red-700 text-red-700 cursor-pointer"
         >
           <Trash2 size={14} />

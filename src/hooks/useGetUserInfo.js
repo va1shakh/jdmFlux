@@ -8,6 +8,7 @@ export function useGetUserInfo(){
     return useQuery({
         queryKey: ["user", user?.id],
         queryFn: () => getUser(user.id),
-        enabled: !!user
+        enabled: !!user,
+        refetchInterval: 300000
     })
 }

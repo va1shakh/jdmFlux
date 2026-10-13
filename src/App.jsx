@@ -9,13 +9,14 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import Builds from "./pages/Builds";
 import About from "./pages/About";
+import Orders from "./pages/Orders"
 import UserLayout from "./layouts/UserLayout";
 import { AdminLayout } from "./layouts/AdminLayout";
 import { Dashboard } from "./admin/pages/Dashboard";
 import { ProtectedRoute } from "./routes/ProtectedRoute";
-import { Products } from "./admin/pages/Products";
-import {Orders} from "./admin/pages/Orders"
 import { UsersPage } from "./admin/pages/UsersPage";
+import { OrdersPage } from "./admin/pages/OrdersPage";
+import { ProductsPage } from "./admin/pages/ProductsPage";
 
 function App() {
   return (
@@ -46,8 +47,8 @@ function App() {
           <Route path="/admin" element={<AdminLayout />}>
             <Route path="/admin" element={<Dashboard />} />
             <Route path="/admin/users" element={<UsersPage />} />
-            <Route path="/admin/products" element={<Products />} />
-            <Route path="/admin/orders" element={<Orders />} />
+            <Route path="/admin/orders" element={<OrdersPage />} />
+            <Route path="/admin/products" element={<ProductsPage/>} />
           </Route>
         </Route>
       </Routes>

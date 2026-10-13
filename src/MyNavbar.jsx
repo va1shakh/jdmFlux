@@ -9,15 +9,17 @@ import logo from "./assets/logo.png";
 import { logout } from "./redux/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Heart, ShoppingCart, Package } from "lucide-react";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import Badge from "@mui/material/Badge";
 import ConfirmDialog from "./components/ConfirmDialog";
 import { useGetWishlist } from "./hooks/useGetWishlist";
 import { useGetCart } from "./hooks/useGetCarts";
 import { useGetUserInfo } from "./hooks/useGetUserInfo";
+import { useEffect } from "react";
 
 function MyNavbar() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector((state) => state.auth.user);
 
   const handleLogout = () => {
@@ -28,6 +30,16 @@ function MyNavbar() {
   const { data: userInfo = {} } = useGetUserInfo();
 
   const { data: wishlists = [] } = useGetWishlist();
+
+  //check if the user is blocked
+  useEffect(() => {
+    if(userInfo.status === "blocked"){
+      dispatch(logout());
+    localStorage.removeItem("user");
+    navigate("login");
+    }
+    
+  },[userInfo.status, dispatch, navigate])
 
   const wishlistCount = wishlists?.length;
 
