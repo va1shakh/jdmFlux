@@ -45,7 +45,7 @@ function Login() {
   };
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-black px-6 text-white">
+    <div className="static flex max-h-screen items-center justify-center overflow-hidden bg-black px-6 text-white">
       {/* Background decoration */}
       <video
         autoPlay
@@ -69,6 +69,7 @@ function Login() {
           shadow-2xl shadow-black/50
           backdrop-blur-2xl
           backdrop-saturate-150
+          mt-20
         "
       >
         {/* Heading */}
