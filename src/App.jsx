@@ -17,6 +17,7 @@ import { ProtectedRoute } from "./routes/ProtectedRoute";
 import { UsersPage } from "./admin/pages/UsersPage";
 import { OrdersPage } from "./admin/pages/OrdersPage";
 import { ProductsPage } from "./admin/pages/ProductsPage";
+import RecycleBinPage from "./admin/pages/RecycleBinPage";
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
             <Route path="/admin/users" element={<UsersPage />} />
             <Route path="/admin/orders" element={<OrdersPage />} />
             <Route path="/admin/products" element={<ProductsPage/>} />
+            <Route path="/admin/trash" element={<RecycleBinPage />} />
           </Route>
         </Route>
       </Routes>

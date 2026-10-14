@@ -10,7 +10,7 @@ export function AdminLayout() {
   return (
     <Sidebar onLogout={handleLogout}>
       <div className="p-4 sm:p-6 lg:p-8 bg-[#f8f7f4] border border-black/10 rounded-2xl min-h-screen">
-        <Header onLogout={handleLogout} />
+        {/* <Header onLogout={handleLogout} /> */}
         <Outlet />
       </div>
     </Sidebar>

@@ -22,6 +22,7 @@ export function AddProductModal({ isOpen, onClose }) {
     brand: "",
     image: "",
     stock: "",
+    isDeleted: false
   });
 
   const handleAddProduct = useAddProduct(onClose);

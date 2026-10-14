@@ -13,12 +13,16 @@ import {
   Tag,
   Boxes,
   AlertTriangle,
+  Delete,
+  Trash,
 } from "lucide-react";
 import { AddProductModal } from "../components/AddProductModal";
 import { EditProductModal } from "../components/EditProductModal";
 import { useGetProducts } from "../../hooks/useGetProducts";
 import { filterProducts } from "../../api/filterProducts";
 import { useDebouncing } from "../hooks/useDebouncing";
+import ConfirmDialog from "../../components/ConfirmDialog";
+import { useMoveToTrash } from "../hooks/useMoveTrash";
 
 const formatPrice = (price) =>
   new Intl.NumberFormat("en-IN", {
@@ -84,18 +88,34 @@ export function ProductsPage() {
   const Dsearch = useDebouncing({ search, delay: 500 });
 
   //fetching products
-  const { data: products = [] } = useGetProducts();
-  const filteredProducts = filterProducts({products, Dsearch, category, sort});
+  const { data: allProducts = [] } = useGetProducts();
+  const products = allProducts.filter((product) => product.isDeleted === false);
+  const filteredProducts = filterProducts({
+    products,
+    Dsearch,
+    category,
+    sort,
+  });
 
   //pagination
   const [page, setPage] = useState(1);
   const pageSize = 8;
   const totalPages = Math.ceil(filteredProducts?.length / pageSize);
-  const paginatedProducts = filteredProducts.slice((page - 1) * pageSize, page * pageSize);
+  const paginatedProducts = filteredProducts.slice(
+    (page - 1) * pageSize,
+    page * pageSize,
+  );
+
+  //handleMoveToTrash product
+  const handleMoveToTrash = useMoveToTrash();
 
   const totalCount = products?.length;
-  const lowStockCount = products?.filter((product) => product.stock <= 3 && product.stock > 0).length;
-  const outofStockCount = products?.filter((product) => product.stock === 0).length;
+  const lowStockCount = products?.filter(
+    (product) => product.stock <= 3 && product.stock > 0,
+  ).length;
+  const outofStockCount = products?.filter(
+    (product) => product.stock === 0,
+  ).length;
 
   return (
     <div className="min-h-full bg-[#f8f7f4] px-4 py-5 text-[#171717] sm:px-6 sm:py-7 lg:px-8">
@@ -265,7 +285,8 @@ export function ProductsPage() {
                   <th className="px-4 py-3.5 font-semibold">Category</th>
                   <th className="px-4 py-3.5 font-semibold">Price</th>
                   <th className="px-4 py-3.5 font-semibold">Brand</th>
-                  <th className="px-4 py-3.5 font-semibold">Stock status</th>
+                  <th className="px-4 py-3.5  font-semibold">Stock status</th>
+                  <th className=" py-3.5 text-center font-semibold">delete</th>
                   <th className="px-5 py-3.5 text-right font-semibold">
                     Action
                   </th>
@@ -308,6 +329,18 @@ export function ProductsPage() {
                     <td className="px-4 py-3.5">
                       <StockBadge stock={product.stock} />
                     </td>
+                    <td className=" px-5 py-3.5">
+                      <ConfirmDialog
+                        trigger={
+                          <button className="cursor-pointer">
+                            <Trash color="#b50e02" size={23} />
+                          </button>
+                        }
+                        title="Move to trash"
+                        description="This product will be moved to Trash. you can restore it whenever you needed"
+                        onConfirm={() => handleMoveToTrash(product.id)}
+                      />
+                    </td>
                     <td className="px-5 py-3.5 text-right">
                       <button
                         type="button"
@@ -329,17 +362,14 @@ export function ProductsPage() {
           <div className="flex flex-col gap-3 border-t border-black/[0.06] px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
             <p className="text-xs text-neutral-500">
               Showing{" "}
-              <span className="font-semibold text-neutral-800">
-                {page}
-              </span>{" "}
-              of{" "}
+              <span className="font-semibold text-neutral-800">{page}</span> of{" "}
               <span className="font-semibold text-neutral-800">
                 {totalPages}
               </span>{" "}
             </p>
             <div className="flex items-center gap-1.5 self-start sm:self-auto">
               <button
-              onClick={() => setPage(page - 1)}
+                onClick={() => setPage(page - 1)}
                 type="button"
                 disabled={page === 1}
                 aria-label="Previous page"
@@ -353,8 +383,8 @@ export function ProductsPage() {
               <span className="px-1 text-sm text-neutral-400">…</span>
               <button type="button" className="h-9 min-w-9 rounded-lg border border-black/[0.07] bg-white px-3 text-xs font-medium text-neutral-600 transition hover:bg-neutral-50">31</button> */}
               <button
-              onClick={() => setPage(page + 1)}
-              disabled={page === totalPages}
+                onClick={() => setPage(page + 1)}
+                disabled={page === totalPages}
                 type="button"
                 aria-label="Next page"
                 className="flex h-9 w-9 items-center justify-center rounded-lg border border-black/[0.07] bg-[#0057ff] text-white transition hover:bg-neutral-50"

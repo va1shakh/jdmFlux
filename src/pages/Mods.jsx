@@ -26,7 +26,8 @@ function Mods() {
     return () => clearTimeout(timer);
   }, [search]);
 
-  const { data: products = [], isLoading, isError } = useGetProducts();
+  const { data: allProducts = [], isLoading, isError } = useGetProducts();
+  const products = allProducts.filter((product) => product.isDeleted === false);
   const filteredProducts = filterProducts({products, Dsearch, category, sort })
 
 

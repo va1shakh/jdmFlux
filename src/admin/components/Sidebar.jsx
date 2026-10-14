@@ -13,6 +13,7 @@ import {
   X,
   PanelLeft,
   PanelLeftClose,
+  Trash,
 } from "lucide-react";
 import { useNavigate } from "react-router";
 
@@ -40,6 +41,12 @@ const NAV_ITEMS = [
     label: "Products",
     icon: Package,
     url: "/admin/products",
+  },
+  {
+    id: "trash",
+    label: "Recycle Bin",
+    icon: Trash,
+    url: "/admin/trash",
   },
 ];
 

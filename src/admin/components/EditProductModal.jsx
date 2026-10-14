@@ -90,15 +90,12 @@ export function EditProductModal({ product, onClose }) {
           }
         >
           <div className="space-y-6 p-5 sm:p-6">
-            <div className="flex items-center gap-3.5 rounded-2xl border border-black/[0.07] bg-[#fbfaf8] p-3.5">
+            <div className="flex items-center gap-3.5 rounded-2xl border border-black/[0.07] bg-[#fbfaf8] p-3.5"> 
               <ProductImage src={product.image} name={product.name} />
               <div className="min-w-0 flex-1">
                 <div className="mb-1 flex flex-wrap items-center gap-2">
                   <span className="rounded-md bg-white px-2 py-1 text-[10px] font-semibold tracking-wide text-neutral-500 ring-1 ring-inset ring-black/[0.07]">
                     {product.id}
-                  </span>
-                  <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wide text-emerald-700">
-                    <BadgeCheck size={12} /> Listed
                   </span>
                 </div>
                 <h3 className="truncate text-sm font-semibold text-neutral-900">
@@ -110,6 +107,8 @@ export function EditProductModal({ product, onClose }) {
                   {product.category}
                 </p>
               </div>
+              {/* delete product */}
+              <button className="border border-red-400 text-red-600 bg-red-400/10 cursor-pointer hover:bg-red-400/15 px-5 py-3 rounded-2xl">Delete</button>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
