@@ -107,8 +107,6 @@ export function EditProductModal({ product, onClose }) {
                   {product.category}
                 </p>
               </div>
-              {/* delete product */}
-              <button className="border border-red-400 text-red-600 bg-red-400/10 cursor-pointer hover:bg-red-400/15 px-5 py-3 rounded-2xl">Delete</button>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">

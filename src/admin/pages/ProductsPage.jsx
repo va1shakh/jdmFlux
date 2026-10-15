@@ -13,7 +13,6 @@ import {
   Tag,
   Boxes,
   AlertTriangle,
-  Delete,
   Trash,
 } from "lucide-react";
 import { AddProductModal } from "../components/AddProductModal";
@@ -24,12 +23,13 @@ import { useDebouncing } from "../hooks/useDebouncing";
 import ConfirmDialog from "../../components/ConfirmDialog";
 import { useMoveToTrash } from "../hooks/useMoveTrash";
 
-const formatPrice = (price) =>
-  new Intl.NumberFormat("en-IN", {
+const formatPrice = (price) => {
+  return new Intl.NumberFormat("en-IN", {
     style: "currency",
     currency: "INR",
     maximumFractionDigits: 0,
   }).format(price);
+};
 
 function ProductThumbnail({ src, name }) {
   const [imageFailed, setImageFailed] = useState(false);

@@ -3,17 +3,16 @@ import {
   Search,
   Trash2,
   RotateCcw,
-  Package,
   AlertTriangle,
-  ArrowUpRight,
   ChevronLeft,
   ChevronRight,
-  MoreHorizontal,
 } from "lucide-react";
 import { useGetProducts } from "../../hooks/useGetProducts";
 import { useRestoreProduct } from "../hooks/useRestoreProduct";
 import ConfirmDialog from "../../components/ConfirmDialog";
 import { useDltProduct } from "../hooks/useDltProduct";
+import { useRestoreAll } from "../hooks/useRestoreAll";
+import { useDltAll } from "../hooks/useDltAll";
 
 const formatPrice = (price) =>
   new Intl.NumberFormat("en-IN", {
@@ -31,8 +30,14 @@ export default function RecycleBinPage() {
   //restore product
   const handleRestoreProduct = useRestoreProduct();
 
+  //restore all
+  const handleRestoreAll = useRestoreAll();
+
   //delete product
   const handleDltProduct = useDltProduct();
+
+  //delete all
+  const handleDltAll = useDltAll();
 
   //pagination
   const [page, setPage] = useState(1);
@@ -57,23 +62,39 @@ export default function RecycleBinPage() {
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-2">
-            <button
-              type="button"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-black/10 bg-white px-4 py-2.5 text-sm font-semibold transition hover:bg-neutral-100"
-            >
-              <RotateCcw size={16} />
-              Restore all
-            </button>
+          {trashedProducts.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              <ConfirmDialog
+                trigger={
+                  <button
+                    type="button"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-black/10 bg-white px-4 py-2.5 text-sm font-semibold transition hover:bg-neutral-100"
+                  >
+                    <RotateCcw size={16} />
+                    Restore all
+                  </button>
+                }
+                title="Restore All"
+                description="Are you sure want to restore all ?"
+                onConfirm={() => handleRestoreAll(trashedProducts)}
+              />
 
-            <button
-              type="button"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-red-700"
-            >
-              <Trash2 size={16} />
-              Delete all
-            </button>
-          </div>
+              <ConfirmDialog
+                trigger={
+                  <button
+                    type="button"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-red-700"
+                  >
+                    <Trash2 size={16} />
+                    Delete all
+                  </button>
+                }
+                title="Delete All"
+                description="Are you sure want to delete permanently ?"
+                onConfirm={() => handleDltAll(trashedProducts)}
+              />
+            </div>
+          )}
         </div>
 
         {/* Summary cards */}
@@ -92,9 +113,18 @@ export default function RecycleBinPage() {
                 </p>
               </div>
 
-              <div className="rounded-xl bg-neutral-100 p-3">
-                <Trash2 size={21} className="text-neutral-700" />
-              </div>
+              {trashedProducts.length > 0 && (
+                <ConfirmDialog
+                  trigger={
+                    <button className="rounded-xl bg-neutral-100 p-3">
+                      <Trash2 size={21} className="text-neutral-700" />
+                    </button>
+                  }
+                  title="Delete All"
+                  description="Are you sure want to delete all ?"
+                  onConfirm={() => handleDltAll(trashedProducts)}
+                />
+              )}
             </div>
           </div>
 
@@ -226,15 +256,22 @@ export default function RecycleBinPage() {
                     </td>
 
                     <td className="px-3 py-4 text-center">
-                      <ConfirmDialog trigger={<button
-                        type="button"
-                        title="Permanently delete product"
-                        aria-label={`Permanently delete ${product.name}`}
-                        className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs font-semibold text-red-600 transition hover:border-red-300 hover:bg-red-100"
-                      >
-                        <Trash2 size={14} />
-                        Delete
-                      </button>} title="Delete Product" description="Are you sure to delete the product permanently ?" onConfirm={() => handleDltProduct(product.id)} />
+                      <ConfirmDialog
+                        trigger={
+                          <button
+                            type="button"
+                            title="Permanently delete product"
+                            aria-label={`Permanently delete ${product.name}`}
+                            className="inline-flex items-center justify-center gap-1.5 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-xs font-semibold text-red-600 transition hover:border-red-300 hover:bg-red-100"
+                          >
+                            <Trash2 size={14} />
+                            Delete
+                          </button>
+                        }
+                        title="Delete Product"
+                        description="Are you sure to delete the product permanently ?"
+                        onConfirm={() => handleDltProduct(product.id)}
+                      />
                     </td>
                   </tr>
                 ))}
@@ -244,34 +281,17 @@ export default function RecycleBinPage() {
                   <tr>
                     <td colSpan={8} className="px-6 py-20 text-center">
                       <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-neutral-100">
-                        {true ? (
-                          <Search size={24} className="text-neutral-400" />
-                        ) : (
-                          <Trash2 size={24} className="text-neutral-400" />
-                        )}
+                        <Trash2 size={24} className="text-neutral-400" />
                       </div>
 
                       <h3 className="mt-4 font-semibold text-neutral-900">
-                        {true
-                          ? "No products found"
-                          : "Your recycle bin is empty"}
+                        Your recycle bin is empty
                       </h3>
 
                       <p className="mx-auto mt-1 max-w-sm text-sm text-neutral-500">
-                        {true
-                          ? "Try another product name, ID, category, or brand."
-                          : "Deleted products will appear here when you move them to the recycle bin."}
+                        Deleted products will appear here when you move them to
+                        the recycle bin
                       </p>
-
-                      {true && (
-                        <button
-                          type="button"
-                          //   onClick={() => setSearch("")}
-                          className="mt-4 text-sm font-semibold underline underline-offset-4"
-                        >
-                          Clear search
-                        </button>
-                      )}
                     </td>
                   </tr>
                 )}
@@ -306,7 +326,7 @@ export default function RecycleBinPage() {
 
               <button
                 type="button"
-                disabled={page == totalPages}
+                disabled={page == totalPages || trashedProducts.length === 0}
                 onClick={() => setPage(page + 1)}
                 className="inline-flex items-center gap-1 rounded-lg border border-black/10 px-3 py-2 text-xs font-medium transition hover:bg-neutral-100 disabled:cursor-not-allowed disabled:opacity-40"
               >

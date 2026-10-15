@@ -1,4 +1,4 @@
-import { QueryClient, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { getCart } from "../api/cart/getCart";
 import { useSelector } from "react-redux";
@@ -55,11 +55,8 @@ export default function Checkout() {
         title: "Order Successfull !",
         text: `Dear ${user.username} your order has been placed`,
         icon: "success",
-        iconColor: "#A3FF12",
-        color: "#f8f7f4",
-        background: "#1a1a1a",
-        showConfirmButton: true,
         confirmButtonText: "View Order",
+        confirmButtonColor: "#0057ff"
       });
       navigate("/orders");
       entireDeleteCartMutation.mutate();
