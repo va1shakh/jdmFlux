@@ -13,7 +13,7 @@ const statuses = ["PENDING", "SHIPPED", "DELIVERED", "CANCELLED"];
 export function OrdersTable({ orders, onViewOrder }) {
 const handleStatusChange = useChangeStatus();
   return (
-    <div className="overflow-x-auto rounded-xl border border-black/10 bg-white shadow-sm">
+    <div className="overflow-x-auto rounded-3xl border border-gray-300 bg-white drop-shadow-lg p-3">
       <table className="w-full min-w-[950px] text-left">
         <thead className="border-b border-gray-200 bg-gray-50/80">
           <tr className="text-xs font-semibold uppercase tracking-wider text-gray-500">

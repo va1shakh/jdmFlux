@@ -1,8 +1,8 @@
 import "@google/model-viewer";
 import { useState } from "react";
 import { ContainerTextFlip } from "../components/text-flip";
-import HomeButton from "../components/HomeButton";
 import { useNavigate } from "react-router";
+import ButtonV2 from "./ButtonV2";
 
 export function Hero({ bgColor }) {
   const navigate = useNavigate();
@@ -11,7 +11,6 @@ export function Hero({ bgColor }) {
     <div>
       <div
         className={`py-4 ${bgColor} border-b-2 border-b-white/13 border-white mx-5`}
-        
       >
         <select
           className="
@@ -56,12 +55,17 @@ export function Hero({ bgColor }) {
               words={["Toyota", "Nissan", "Mitsubishi", "Honda"]}
             />
           </div>
-          <HomeButton
-            className="pointer-events-auto"
-            size="xl"
-            children="See more"
-            onClick={() => navigate("/mods")}
-          />
+          <ButtonV2
+          onClick={() => navigate("/mods")}
+            type="button"
+            bgColor="bg-[#0057ff]"
+            textColor="text-[#f8f7f4]"
+            hoverColor="hover:bg-[#0057ff]"
+            rounded="rounded-xl"
+            size="md"
+          >
+            See more
+          </ButtonV2>
         </section>
       </div>
     </div>

@@ -2,11 +2,11 @@ import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 
 const FeaturedMods = ({ children }) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel(
+  const [emblaRef] = useEmblaCarousel(
     {
       loop: true,
       align: "start",
-      slidesToScroll: 3,
+      slidesToScroll: 1,
     },
     [
       Autoplay({
@@ -18,8 +18,10 @@ const FeaturedMods = ({ children }) => {
   );
 
   return (
-    <div className="overflow-hidden" ref={emblaRef}>
-      <div className="flex ml-34 pb-20">{children}</div>
+    <div className="w-full min-w-0 overflow-hidden" ref={emblaRef}>
+      <div className="flex pb-10 sm:pb-14 lg:pb-20">
+        {children}
+      </div>
     </div>
   );
 };

@@ -53,8 +53,7 @@ const NAV_ITEMS = [
 export default function Sidebar({
   children,
   siteName = "JDMFLUX",
-  adminName = "Vaishakh",
-  adminEmail = "admin@jdmflux.com",
+  adminInfo,
   defaultActive = "dashboard",
   onNavigate,
   onLogout,
@@ -70,15 +69,6 @@ export default function Sidebar({
   const [mobileOpen, setMobileOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
   const [activeItem, setActiveItem] = useState(defaultActive);
-
-  const initials =
-    adminName
-      .split(" ")
-      .filter(Boolean)
-      .map((part) => part[0])
-      .join("")
-      .slice(0, 2)
-      .toUpperCase() || "AD";
 
   const handleNavigation = (id) => {
     setActiveItem(id);
@@ -204,10 +194,10 @@ export default function Sidebar({
           <div className="absolute bottom-full left-3 right-3 z-50 mb-2 overflow-hidden rounded-xl border border-black/20 bg-white p-2 shadow-xl shadow-neutral-950/10">
             <div className="px-3 py-3">
               <p className="truncate text-sm font-semibold text-neutral-900">
-                {adminName}
+                {adminInfo?.username}
               </p>
               <p className="mt-1 truncate text-xs text-neutral-500">
-                {adminEmail}
+                {adminInfo?.email}
               </p>
             </div>
 
@@ -226,7 +216,7 @@ export default function Sidebar({
 
         <button
           type="button"
-          title={!expanded ? adminName : undefined}
+          title={!expanded ? adminInfo?.username : undefined}
           aria-expanded={profileOpen}
           onClick={() => setProfileOpen((current) => !current)}
           className={`flex min-h-12 w-full items-center rounded-xl transition-colors hover:bg-neutral-100 ${
@@ -234,14 +224,14 @@ export default function Sidebar({
           }`}
         >
           <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#0057ff] text-xs font-bold text-[#f8f7f4] ring-1 ring-neutral-300">
-            {initials}
+            {adminInfo?.username?.[0]}
           </div>
 
           {expanded && (
             <>
               <div className="min-w-0 flex-1 text-left">
                 <p className="truncate text-sm font-semibold text-neutral-900">
-                  {adminName}
+                  {adminInfo?.username}
                 </p>
                 <p className="truncate text-xs text-neutral-500">
                   Administrator

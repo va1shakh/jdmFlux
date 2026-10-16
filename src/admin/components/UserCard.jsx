@@ -28,9 +28,9 @@ export function UserCard({ user }) {
   const handleDltUser = useDltUser();
 
   return (
-    <article className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:border-slate-300">
+    <article className="rounded-3xl drop-shadow-lg border border-gray-300 bg-[#ffffff] p-4 transition">
       <div className="flex min-w-0 items-start gap-3">
-        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-black/90 text-slate-500">
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#246dff] text-slate-500">
           <span className="text-white/90">
             {user?.username?.[0]?.toUpperCase()}
           </span>

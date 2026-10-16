@@ -69,7 +69,7 @@ export function OrdersPage() {
         {stats.map(({ label, value, icon: Icon, color }) => (
           <div
             key={label}
-            className="rounded-xl border border-black/10 bg-white p-5 transition hover:shadow-sm"
+            className="rounded-3xl border border-gray-300 bg-white p-5 transition drop-shadow-lg"
           >
             <div className="flex items-center justify-between">
               <p className="text-sm font-medium text-gray-500">{label}</p>
@@ -85,9 +85,9 @@ export function OrdersPage() {
       </div>
 
       {/* Search and filters */}
-      <div className="rounded-xl border border-black/10 bg-white p-4 sm:p-5">
+      <div className="rounded-3xl border border-gray-300 drop-shadow-lg bg-white p-4 sm:p-5">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-          <div className="relative w-full lg:max-w-sm">
+          <div className="relative w-full lg:max-w-sm border-2 rounded-3xl border-gray-300">
             <Search
               size={18}
               className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
@@ -96,7 +96,7 @@ export function OrdersPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search order ID or customer..."
-              className="w-full rounded-lg border border-gray-200 py-3 pl-10 pr-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+              className="w-full rounded-lg py-3 pl-10 pr-3 text-sm outline-none transition "
             />
           </div>
 
@@ -125,7 +125,7 @@ export function OrdersPage() {
 
       {/* Orders table */}
       <div>
-        <div className="mb-4 flex items-center justify-between gap-3">
+        <div className="mb-4 flex items-center justify-between gap-3 border border-gray-300 drop-shadow-lg bg-white p-5 rounded-3xl">
           <div>
             <h2 className="text-lg font-semibold text-gray-950">All orders</h2>
             <p className="mt-1 text-sm text-gray-500">
@@ -163,24 +163,24 @@ export function OrdersPage() {
                   type="button"
                   disabled={page === 1}
                   onClick={() => setPage(page - 1)}
-                  className="rounded-lg border border-gray-200 p-2 transition hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-40"
+                  className="rounded-lg bg-[#0057ff] p-2 transition hover:bg-[#226cff]"
                   aria-label="Previous page"
                 >
-                  <ChevronLeft size={18} />
+                  <ChevronLeft color="#f8f7f4" size={18} />
                 </button>
 
-                <span className="px-2 text-sm font-medium text-gray-700">
-                  Page {page} of {totalPages}
+                <span className="px-2 text-sm font-medium text-black">
+                  {page}
                 </span>
 
                 <button
                   type="button"
                   disabled={page === totalPages}
                   onClick={() => setPage(page + 1)}
-                  className="rounded-lg border border-gray-200 p-2 transition hover:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-40"
+                  className="rounded-lg bg-[#0057ff] p-2 transition hover:bg-[#226cff]"
                   aria-label="Next page"
                 >
-                  <ChevronRight size={18} />
+                  <ChevronRight color="#f8f7f4" size={18} />
                 </button>
               </div>
             </div>

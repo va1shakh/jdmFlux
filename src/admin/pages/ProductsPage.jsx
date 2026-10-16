@@ -123,10 +123,10 @@ export function ProductsPage() {
         {/* Page heading */}
         <div className="mb-7 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>
-            <h1 className="text-2xl font-semibold tracking-[-0.04em] sm:text-3xl">
+            <h1 className="text-2xl text-[#0057ff] font-semibold tracking-[-0.04em] sm:text-3xl">
               Products
             </h1>
-            <p className="mt-1.5 max-w-2xl text-sm text-neutral-500">
+            <p className="mt-1.5 max-w-2xl text-sm text-neutral-800">
               Manage your catalog, update inventory, and keep your JDM parts in
               stock.
             </p>
@@ -134,7 +134,7 @@ export function ProductsPage() {
           <button
             type="button"
             onClick={() => setIsAddModalOpen(true)}
-            className="inline-flex h-11 items-center justify-center gap-2 self-start rounded-xl bg-[#0057ff] px-4 text-sm font-semibold text-white shadow-sm shadow-blue-950/10 transition hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-500/20 sm:self-auto"
+            className="inline-flex h-11 items-center justify-center gap-2 self-start rounded-xl bg-[#0057ff] px-4 text-sm font-semibold text-white shadow-sm shadow-blue-950/10 transition hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-500/20 sm:self-auto cursor-pointer"
           >
             <CirclePlus size={17} strokeWidth={2.2} />
             Add product
@@ -143,17 +143,14 @@ export function ProductsPage() {
 
         {/* Summary cards */}
         <div className="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
-          <div className="rounded-2xl border border-black/[0.07] bg-white p-4 sm:p-5">
+          <div className="rounded-2xl bg-[#0057ff] p-4 sm:p-5 drop-shadow-lg">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="text-sm font-medium text-neutral-500">
+                <p className="text-sm font-medium text-[#f8f7f4]">
                   Total products
                 </p>
-                <p className="mt-2 text-2xl font-semibold tracking-tight">
+                <p className="mt-2 text-2xl text-[#f8f7f4] font-semibold tracking-tight">
                   {totalCount}
-                </p>
-                <p className="mt-1 text-xs text-neutral-400">
-                  Across your catalog
                 </p>
               </div>
               <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-700">
@@ -161,17 +158,14 @@ export function ProductsPage() {
               </span>
             </div>
           </div>
-          <div className="rounded-2xl border border-black/[0.07] bg-white p-4 sm:p-5">
+          <div className="rounded-2xl bg-[#ffdd00] p-4 sm:p-5 drop-shadow-lg drop-shadow-white">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="text-sm font-medium text-neutral-500">
+                <p className="text-sm font-medium text-black  ">
                   Low stock
                 </p>
                 <p className="mt-2 text-2xl font-semibold tracking-tight">
                   {lowStockCount}
-                </p>
-                <p className="mt-1 text-xs text-neutral-400">
-                  3 units or fewer
                 </p>
               </div>
               <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 text-amber-700">
@@ -179,13 +173,13 @@ export function ProductsPage() {
               </span>
             </div>
           </div>
-          <div className="rounded-2xl border border-black/[0.07] bg-white p-4 sm:p-5">
+          <div className="rounded-2xl bg-[#b40202] p-4 sm:p-5 drop-shadow-lg">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="text-sm font-medium text-neutral-500">
+                <p className="text-sm font-medium text-[#f8f7f4]">
                   Out of stock
                 </p>
-                <p className="mt-2 text-2xl font-semibold tracking-tight">
+                <p className="mt-2 text-2xl text-[#f8f7f4] font-semibold tracking-tight">
                   {outofStockCount}
                 </p>
               </div>
@@ -197,19 +191,19 @@ export function ProductsPage() {
         </div>
 
         {/* Filters */}
-        <div className="mb-4 rounded-2xl border border-black/[0.07] bg-white p-3 sm:p-4">
+        <div className="mb-4 rounded-3xl border border-gray-300 bg-white p-3 sm:p-4 drop-shadow-lg">
           <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
             <div className="relative w-full xl:max-w-sm">
               <Search
                 size={17}
-                className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400"
+                className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-black"
               />
               <input
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="Search products, brands, IDs..."
                 aria-label="Search products"
-                className="h-11 w-full rounded-xl border border-black/[0.08] bg-[#fbfaf8] pl-10 pr-4 text-sm outline-none transition placeholder:text-neutral-400 focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10"
+                className="h-11 w-full rounded-2xl border-2 border-black/10 bg-[#fbfaf8] pl-10 pr-4 text-sm outline-none transition placeholder:text-neutral-400"
               />
             </div>
             <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
@@ -225,7 +219,7 @@ export function ProductsPage() {
                 <select
                   onChange={(e) => setCategory(e.target.value)}
                   defaultValue="all"
-                  className="h-11 w-full appearance-none rounded-xl border border-black/[0.08] bg-white pl-9 pr-9 text-sm font-medium text-neutral-700 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
+                  className="h-11 w-full appearance-none rounded-xl border border-black/[0.08] bg-white pl-9 pr-9 text-sm font-medium text-neutral-700 outline-none transition "
                 >
                   <option value="all">All categories</option>
                   <option value="Wheels">Wheels</option>
@@ -246,7 +240,7 @@ export function ProductsPage() {
                 <select
                   onChange={(e) => setSort(e.target.value)}
                   defaultValue="default"
-                  className="h-11 w-full appearance-none rounded-xl border border-black/[0.08] bg-white pl-9 pr-9 text-sm font-medium text-neutral-700 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10"
+                  className="h-11 w-full appearance-none rounded-xl border border-black/[0.08] bg-white pl-9 pr-9 text-sm font-medium text-neutral-700 outline-none transition "
                 >
                   <option value="">Sort by price</option>
                   <option value="low">Price: low to high</option>
@@ -262,7 +256,7 @@ export function ProductsPage() {
         </div>
 
         {/* Products table */}
-        <div className="overflow-hidden rounded-2xl border border-black/[0.07] bg-white">
+        <div className="overflow-hidden rounded-3xl p-3 drop-shadow-lg border border-gray-300 bg-white">
           <div className="flex flex-col gap-1 border-b border-black/[0.06] px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
             <div>
               <h2 className="text-sm font-semibold">All products</h2>
@@ -373,21 +367,17 @@ export function ProductsPage() {
                 type="button"
                 disabled={page === 1}
                 aria-label="Previous page"
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-black/[0.07] bg-[#0057ff] text-white disabled:cursor-not-allowed"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-black/[0.07] bg-[#0057ff] text-[#f8f7f4] hover:bg-[#286fff] cursor-pointer"
               >
                 <ChevronLeft size={16} />
               </button>
-              {/* <button type="button" aria-current="page" className="h-9 min-w-9 rounded-lg bg-[#171717] px-3 text-xs font-semibold text-white">1</button>
-              <button type="button" className="h-9 min-w-9 rounded-lg border border-black/[0.07] bg-white px-3 text-xs font-medium text-neutral-600 transition hover:bg-neutral-50">2</button>
-              <button type="button" className="h-9 min-w-9 rounded-lg border border-black/[0.07] bg-white px-3 text-xs font-medium text-neutral-600 transition hover:bg-neutral-50">3</button>
-              <span className="px-1 text-sm text-neutral-400">…</span>
-              <button type="button" className="h-9 min-w-9 rounded-lg border border-black/[0.07] bg-white px-3 text-xs font-medium text-neutral-600 transition hover:bg-neutral-50">31</button> */}
+              <span className="px-3 text-black">{page}</span>
               <button
                 onClick={() => setPage(page + 1)}
                 disabled={page === totalPages}
                 type="button"
                 aria-label="Next page"
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-black/[0.07] bg-[#0057ff] text-white transition hover:bg-neutral-50"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-black/[0.07] bg-[#0057ff] text-[#f8f7f4] transition hover:bg-[#206aff] cursor-pointer"
               >
                 <ChevronRight size={16} />
               </button>

@@ -1,7 +1,7 @@
 import { SearchBar } from "../components/SearchBar";
 import { ProductCard } from "../components/ProductCard";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux"; 
+import { useSelector } from "react-redux";
 import ProductModal from "../components/ProductModal";
 import useCart from "../hooks/useCart";
 import useWishlist from "../hooks/useWishlist";
@@ -16,8 +16,8 @@ function Mods() {
   const [sort, setSort] = useState("");
   const user = useSelector((state) => state.auth.user);
 
-  const {handleCartClick} = useCart();
-  const {handleWishlist, wishlist} = useWishlist();
+  const { handleCartClick } = useCart();
+  const { handleWishlist, wishlist } = useWishlist();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -28,78 +28,120 @@ function Mods() {
 
   const { data: allProducts = [], isLoading, isError } = useGetProducts();
   const products = allProducts.filter((product) => product.isDeleted === false);
-  const filteredProducts = filterProducts({products, Dsearch, category, sort })
+  const filteredProducts = filterProducts({
+    products,
+    Dsearch,
+    category,
+    sort,
+  });
 
+ return (
+  <main className="w-full min-w-0 px-3 pb-10 sm:px-4 lg:px-6">
 
-  return (
-    <div className="flex rounded-2xl flex-col mx-10 min-h-screen gap-4 pb-10 mt-10">
-      <div className=" p-5 rounded-2xl">
-      {/* search bar */}
-      <div className="flex justify-between gap-10 my-4 ">
+    {/* CONTENT BOX */}
+    <section className="mx-auto w-full min-w-0 max-w-[384px] rounded-2xl border border-white/10 p-3 sm:max-w-[768px] sm:p-4 lg:max-w-[1152px] lg:p-5">
+
+      {/* TOOLBAR */}
+      <div className="mb-8 flex min-w-0 flex-col gap-4 md:flex-row md:items-center">
+
         {/* Search */}
-        <div className="flex-1">
+        <div className="w-full min-w-0 md:flex-1">
           <SearchBar
-
             placeholder="Search products here..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-        {/* Filter + Sort */}
-        <div className="flex gap-3 mr-15">
+
+        {/* Category + Sort */}
+        <div className="grid w-full grid-cols-2 gap-3 md:w-auto md:shrink-0">
+
           <select
-            className="px-5 py-2.5 rounded-lg outline-none bg-white/13 focus:bg-black text-white/90"
+            value={category}
             onChange={(e) => setCategory(e.target.value)}
+            className="h-11 w-full min-w-0 rounded-xl border border-white/10 bg-white/10 px-2 text-sm text-white outline-none sm:px-3 md:min-w-[150px]"
           >
-            <option value="all">All</option>
+            <option value="all">All Categories</option>
             <option value="Wheels">Wheels</option>
             <option value="Spoiler">Spoiler</option>
             <option value="Exhaust">Exhaust</option>
           </select>
 
           <select
-            className="px-1 mx-5 py-2.5 rounded-lg bg-white/13 focus:bg-black outline-none  text-white/90"
+            value={sort}
             onChange={(e) => setSort(e.target.value)}
+            className="h-11 w-full min-w-0 rounded-xl border border-white/10 bg-white/10 px-2 text-sm text-white outline-none sm:px-3 md:min-w-[160px]"
           >
-            <option value="">Sort</option>
+            <option value="">Sort by Price</option>
             <option value="low">Price: Low to High</option>
             <option value="high">Price: High to Low</option>
           </select>
+
         </div>
       </div>
+      {/* END TOOLBAR */}
 
-      <div className="grid grid-cols-3 gap-x-0  gap-y-20 my-10 justify-items-center">
-        {filteredProducts?.map((product) => {
-          const isWishlisted = wishlist.some(
-            (item) => item.productId === product.id,
-          );
 
-          return (
-            <ProductCard
-              key={product.id}
-              name={product.name}
-              img={product.image}
-              category={product.category}
-              brand={product.brand}
-              price={product.price}
-              stock={product.stock}
-              isWishlisted={user && isWishlisted}
-              onWishlistClick={() => handleWishlist(product)}
-              handleCartClick={() => handleCartClick(product)}
-              handleCardClick={() => setSelectedProduct(product)}
-            />
-          );
-        })}
-      </div>
-      {selectedProduct && (
-        <ProductModal
-          product={selectedProduct}
-          onClose={() => setSelectedProduct(null)}
-          handleCartClick={() => handleCartClick(selectedProduct)}
-        />
+      {/* PRODUCTS */}
+      {isLoading ? (
+        <p className="py-12 text-center text-white/60">
+          Loading products...
+        </p>
+      ) : isError ? (
+        <p className="py-12 text-center text-red-400">
+          Failed to load products. Please try again.
+        </p>
+      ) : filteredProducts.length === 0 ? (
+        <p className="py-12 text-center text-white/60">
+          No products found.
+        </p>
+      ) : (
+        <div className="flex flex-wrap gap-x-4 gap-y-8">
+
+          {filteredProducts.map((product) => {
+            const isWishlisted = wishlist.some(
+              (item) => item.productId === product.id
+            );
+
+            return (
+              <div
+                key={product.id}
+                className="w-full min-w-0 sm:w-[calc(50%_-_0.5rem)] lg:w-[calc(33.333333%_-_0.667rem)]"
+              >
+                <ProductCard
+                  name={product.name}
+                  img={product.image}
+                  category={product.category}
+                  brand={product.brand}
+                  price={product.price}
+                  stock={product.stock}
+                  isWishlisted={user && isWishlisted}
+                  onWishlistClick={() => handleWishlist(product)}
+                  handleCartClick={() => handleCartClick(product)}
+                  handleCardClick={() => setSelectedProduct(product)}
+                />
+              </div>
+            );
+          })}
+
+        </div>
       )}
-      </div>
-    </div>
-  );
+      {/* END PRODUCTS */}
+
+    </section>
+    {/* END CONTENT BOX */}
+
+
+    {/* PRODUCT MODAL */}
+    {selectedProduct && (
+      <ProductModal
+        product={selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+        handleCartClick={() => handleCartClick(selectedProduct)}
+      />
+    )}
+
+  </main>
+);
 }
 export default Mods;

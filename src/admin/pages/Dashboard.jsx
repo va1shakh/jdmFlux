@@ -3,9 +3,7 @@ import {
   ShoppingCart,
   Users,
   Package,
-  TrendingUp,
   ArrowUpRight,
-  MoreHorizontal,
 } from "lucide-react";
 import { useGetProducts } from "../../hooks/useGetProducts";
 import { useGetUsersOrders } from "../hooks/useGetUsersOrders";
@@ -98,7 +96,7 @@ export function Dashboard() {
     .slice(0, 4);
 
   return (
-    <div className="mx-auto mt-9 w-full max-w-screen-2xl space-y-6">
+    <div className="mx-auto w-full max-w-screen-2xl space-y-6">
       {/* Statistics Grid */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {stats.map((stat) => {
@@ -107,7 +105,7 @@ export function Dashboard() {
           return (
             <div
               key={stat.title}
-              className="rounded-xl border drop-shadow-lg border-gray-200 bg-white p-5 transition hover:border-gray-300"
+              className="rounded-3xl border drop-shadow-lg border-gray-300 bg-white p-5 transition hover:bg-blue-50 hover:border-blue-500"
             >
               <div className="flex items-center justify-between">
                 <p className="text-sm font-medium text-gray-500">
@@ -129,14 +127,14 @@ export function Dashboard() {
       </div>
 
       {/* Main Analytics Grid */}
-      <div className="grid grid-cols-1 items-stretch gap-6 xl:grid-cols-3">
+      <div className="grid grid-cols-1 items-stretch gap-6 xl:grid-cols-3 ">
         {/* Revenue Overview — takes 2/3 of the available width */}
-        <div className="min-w-0 xl:col-span-2">
+        <div className="min-w-0 xl:col-span-2 border drop-shadow-lg border-gray-300 bg-white rounded-3xl">
           <RevenueChart revenueData={revenueData} />
         </div>
 
         {/* Order Summary */}
-        <section className="flex h-full min-w-0 flex-col rounded-xl border border-gray-200 bg-white p-5 shadow-lg sm:p-6">
+        <section className="flex h-full min-w-0 flex-col rounded-3xl border border-gray-300 bg-white p-5 drop-shadow-lg sm:p-6">
           <div className="flex items-center justify-between">
             <div>
               <h2 className="text-base font-semibold text-gray-900">
@@ -202,7 +200,7 @@ export function Dashboard() {
       </div>
 
       {/* Recent Orders */}
-      <section className="overflow-hidden rounded-xl border border-gray-200 bg-white">
+      <section className="overflow-hidden drop-shadow-lg rounded-3xl border border-gray-300 bg-white">
         <div className="flex items-center justify-between gap-3 p-5 sm:px-6">
           <div>
             <h2 className="text-base font-semibold text-gray-900">

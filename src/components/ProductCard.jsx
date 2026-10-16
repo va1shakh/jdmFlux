@@ -17,12 +17,12 @@ export const ProductCard = memo(function ProductCard({
   return (
     <div
       onClick={handleCardClick}
-      className="group relative flex w-90 cursor-pointer flex-col overflow-hidden rounded-2xl bg-[#f8f7f4] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+      className="group relative flex max-w-[360px] min-w-0 cursor-pointer flex-col overflow-hidden rounded-2xl bg-[#f8f7f4] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
     >
       {/* Wishlist Button */}
       <button
         type="button"
-        className="absolute right-4 top-4 z-40 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 cursor-pointer text-white backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-black/70"
+        className="absolute right-4 top-4 z-1 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 cursor-pointer text-white backdrop-blur-sm transition-all duration-200 hover:scale-110 hover:bg-black/70"
         onClick={(e) => {
           e.stopPropagation();
           onWishlistClick();

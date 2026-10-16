@@ -53,11 +53,11 @@ export default function RecycleBinPage() {
         {/* Page heading */}
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
+            <h1 className="text-2xl text-[#0057ff] font-bold tracking-tight sm:text-3xl">
               Recycle Bin
             </h1>
 
-            <p className="mt-1 text-sm text-neutral-500">
+            <p className="mt-1 text-sm text-neutral-800">
               Manage deleted products and restore them whenever needed.
             </p>
           </div>
@@ -68,7 +68,7 @@ export default function RecycleBinPage() {
                 trigger={
                   <button
                     type="button"
-                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-black/10 bg-white px-4 py-2.5 text-sm font-semibold transition hover:bg-neutral-100"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#257618] px-4 py-2.5 text-sm font-semibold transition text-white/90 cursor-pointer hover:bg-[#249812]"
                   >
                     <RotateCcw size={16} />
                     Restore all
@@ -83,7 +83,7 @@ export default function RecycleBinPage() {
                 trigger={
                   <button
                     type="button"
-                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-red-700"
+                    className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-4 py-2.5 text-sm font-semibold text-white transition cursor-pointer hover:bg-red-700"
                   >
                     <Trash2 size={16} />
                     Delete all
@@ -99,7 +99,7 @@ export default function RecycleBinPage() {
 
         {/* Summary cards */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <div className="rounded-2xl border border-black/5 bg-white p-5">
+          <div className="rounded-3xl border border-gray-300 bg-white drop-shadow-lg p-5">
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-sm font-medium text-neutral-500">
@@ -116,7 +116,7 @@ export default function RecycleBinPage() {
               {trashedProducts.length > 0 && (
                 <ConfirmDialog
                   trigger={
-                    <button className="rounded-xl bg-neutral-100 p-3">
+                    <button className="rounded-xl cursor-pointer bg-neutral-100 p-3">
                       <Trash2 size={21} className="text-neutral-700" />
                     </button>
                   }
@@ -150,7 +150,7 @@ export default function RecycleBinPage() {
         </div>
 
         {/* Products table container */}
-        <div className="overflow-hidden rounded-2xl border border-black/5 bg-white">
+        <div className="overflow-hidden rounded-3xl border border-gray-300 drop-shadow-lg bg-white">
           {/* Table toolbar */}
           <div className="flex flex-col gap-4 border-b border-black/5 p-4 sm:p-5 md:flex-row md:items-center md:justify-between">
             <div>

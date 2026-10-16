@@ -84,28 +84,33 @@ const sampleMarkers = [
 
 function About() {
   return (
-    <div className="flex justify-around items-center ">
-      <div>
-        {" "}
-        <h2 className="mb-5 text-3xl font-bold tracking-tight text-neutral-900 dark:text-white md:text-5xl">
-          {" "}
-          About US !{" "}
-        </h2>{" "}
+    <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-8 px-4 py-10 sm:px-6 md:flex-row md:items-center md:gap-12 lg:gap-16 lg:px-8">
+      {/* ABOUT SECTION */}
+      <div className="w-full min-w-0 md:flex-1">
+        <h2 className="mb-5 text-3xl font-bold tracking-tight text-neutral-900 dark:text-white md:text-4xl lg:text-5xl">
+          About Us!
+        </h2>
+
         <p className="max-w-xl leading-7 text-neutral-600 dark:text-neutral-400">
-          {" "}
-          JDM FLUX is a platform built for enthusiasts who share a passion for Japanese cars and automotive culture. Explore iconic JDM cars, discover modification parts, and find inspiration for your next build{" "}
-        </p>{" "}
+          JDM FLUX is a platform built for enthusiasts who share a passion for
+          Japanese cars and automotive culture. Explore iconic JDM cars,
+          discover modification parts, and find inspiration for your next build.
+        </p>
       </div>
 
-      <div className="relative my-16 h-[400px] w-full max-w-lg overflow-hidden rounded-xl bg-white p-10 shadow-sm ring-1 shadow-black/10 ring-black/10 sm:my-24 sm:h-[300px] md:my-32 md:h-[400px] dark:bg-neutral-900">
-        <h2 className="mb-4 text-2xl font-bold text-neutral-900 dark:text-white">
+      {/* GLOBE CARD */}
+      <div className="relative isolate h-[360px] w-full min-w-0 max-w-lg shrink-0 overflow-hidden rounded-xl bg-white p-6 shadow-sm ring-1 ring-black/10 sm:h-[400px] sm:p-8 md:h-[380px] md:flex-1 lg:h-[420px] dark:bg-neutral-900">
+        <h2 className="relative z-10 mb-4 text-2xl font-bold text-neutral-900 dark:text-white">
           The World Runs on JDM
         </h2>
-        <p className="max-w-lg text-balance text-neutral-600 dark:text-neutral-400">
-          JDM FLUX connects enthusiasts united by a passion for Japanese cars, builds, and the culture behindthem.
+
+        <p className="relative z-10 max-w-lg text-balance leading-6 text-neutral-600 dark:text-neutral-400">
+          JDM FLUX connects enthusiasts united by a passion for Japanese cars,
+          builds, and the culture behind them.
         </p>
+
         <Globe3D
-          className="absolute -bottom-96 -left-0 h-[700px]"
+          className="pointer-events-auto absolute -bottom-[300px] left-1/2 h-[600px] w-[600px] -translate-x-1/2 sm:-bottom-[320px] sm:h-[700px] sm:w-[700px] md:-bottom-[300px] lg:-bottom-[330px]"
           markers={sampleMarkers}
           config={{
             atmosphereColor: "#4da6ff",

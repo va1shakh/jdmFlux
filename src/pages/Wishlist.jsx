@@ -16,7 +16,7 @@ function Wishlist() {
   const user = useSelector((state) => state.auth.user);
   const queryClient = useQueryClient();
   const navigate = useNavigate();
-  const icon = <Heart />
+  const icon = <Heart />;
 
   const { data: wishlist = [] } = useQuery({
     queryKey: ["wishlist", user?.id],
@@ -27,8 +27,8 @@ function Wishlist() {
   const { data: carts = [] } = useQuery({
     queryKey: ["carts", user?.id],
     queryFn: () => getCart(user.id),
-    enabled: !!user?.id
-  })
+    enabled: !!user?.id,
+  });
 
   const { data: products = [] } = useQuery({
     queryKey: ["products"],
@@ -45,12 +45,12 @@ function Wishlist() {
     mutationFn: dltWishlist,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["wishlist", user?.id]
-      })
+        queryKey: ["wishlist", user?.id],
+      });
     },
     onError: () => {
       toast.error("Something went wrong");
-    }
+    },
   });
 
   const handleWishlist = (product) => {
@@ -78,10 +78,9 @@ function Wishlist() {
     },
   });
 
-
   const handleCartClick = (product) => {
-    if(!user){
-      navigate('/login');
+    if (!user) {
+      navigate("/login");
       return;
     }
     const cartItem = carts.find((cart) => product.id === cart.productId);
@@ -106,22 +105,28 @@ function Wishlist() {
   };
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-black text-white">
       {wishlist.length === 0 ? (
         <EmptyState icon={icon} name="wishlist" />
       ) : (
-        <div className="p-10">
-          <div className="mb-10 bg-[#1d2024] w-70  rounded-2xl p-5">
-            <h1 className="text-3xl text-[#f8f7f4] font-semibold">Your Wishlist</h1>
+        <div className="mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:px-10 lg:py-10">
+          {/* Header */}
+          <div className="mb-6 w-full rounded-2xl bg-[#1d2024] p-5 sm:mb-8 sm:w-fit sm:min-w-70 sm:p-6">
+            <h1 className="text-2xl font-semibold text-[#f8f7f4] sm:text-3xl">
+              Your Wishlist
+            </h1>
 
             <p className="mt-2 text-sm text-white/80">
-              Your favorite <span className="font-medium text-lg">{wishlist?.length}</span> JDM parts
+              Your favorite{" "}
+              <span className="text-base font-medium sm:text-lg">
+                {wishlist.length}
+              </span>{" "}
+              JDM parts
             </p>
           </div>
-        <div className="grid grid-cols-4 gap-x-0  gap-y-10  justify-items-center bg-[#1d2024] rounded-3xl py-10">
-          
-          {wishlistedProducts?.map((product) => {
-            return (
+          {/* Wishlist Products */}
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] justify-items-center gap-x-6 gap-y-10 rounded-2xl bg-[#1d2024] px-4 py-8 sm:px-6 sm:py-10">
+            {wishlistedProducts?.map((product) => (
               <ProductCard
                 key={product.id}
                 stock={product.stock}
@@ -134,9 +139,8 @@ function Wishlist() {
                 onWishlistClick={() => user && handleWishlist(product)}
                 handleCartClick={() => handleCartClick(product)}
               />
-            );
-          })}
-        </div>
+            ))}
+          </div>
         </div>
       )}
     </div>

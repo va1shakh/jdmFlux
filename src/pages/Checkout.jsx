@@ -7,9 +7,11 @@ import Swal from "sweetalert2";
 import { Navigate, useNavigate } from "react-router";
 import { toast } from "sonner";
 import axios from "axios";
+import { useGetUserInfo } from "../hooks/useGetUserInfo";
 
 export default function Checkout() {
   const user = useSelector((state) => state.auth.user);
+  const {data: userInfo = {}} = useGetUserInfo();
   const [paymentMethod, setPaymentMethod] = useState("cod");
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -53,7 +55,7 @@ export default function Checkout() {
     onSuccess: () => {
       Swal.fire({
         title: "Order Successfull !",
-        text: `Dear ${user.username} your order has been placed`,
+        text: `Dear ${userInfo?.username} your order has been placed`,
         icon: "success",
         confirmButtonText: "View Order",
         confirmButtonColor: "#0057ff"
@@ -99,41 +101,41 @@ export default function Checkout() {
       <form onSubmit={handleOrder}>
         <div className="mx-auto max-w-7xl">
           {/* Header */}
-          <header className="flex mb-14 border-2 border-white/20 p-7 rounded-4xl bg-[#111315]">
+          <header className="flex mb-14 p-7 rounded-4xl bg-[#f8f7f4]">
             <div className="flex gap-6">
               <div>
-                <h1 className="text-4xl text-[#f8f7f4] font-semibold uppercase tracking-[-0.04em] sm:text-5xl">
+                <h1 className="text-4xl text-[#0057ff] font-semibold uppercase tracking-[-0.04em] sm:text-5xl">
                   Checkout
                 </h1>
 
-                <p className="mt-3 text-md text-white/50">
+                <p className="mt-3 text-md text-black/90">
                   Complete your order
                 </p>
               </div>
             </div>
           </header>
 
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_390px] border-2 border-white/20 bg-[#15191D] p-8 rounded-3xl">
+          <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_390px] bg-[#f8f7f4] p-8 rounded-3xl">
             {/* ================= LEFT ================= */}
             <main className="space-y-12">
               {/* Shipping Information */}
               <section>
                 <div className="mb-7 flex items-start gap-5">
                   <div>
-                    <h2 className="text-xl font-medium uppercase tracking-[-0.02em]">
+                    <h2 className="text-xl text-[#0057ff] font-medium uppercase tracking-widest">
                       Shipping information
                     </h2>
 
-                    <p className="mt-2 text-sm text-neutral-400">
+                    <p className="mt-2 text-sm font-semibold tracking-wider text-black/90">
                       Enter your delivery details.
                     </p>
                   </div>
                 </div>
-                <div className="border-y border-neutral-700 py-7">
+                <div className="py-7">
                   <div className="grid gap-x-6 gap-y-7 sm:grid-cols-2">
                     {/* Full name */}
                     <label className="group block">
-                      <span className="mb-2 block text-[10px] font-medium uppercase tracking-[0.2em] text-neutral-400 transition group-focus-within:text-white">
+                      <span className="mb-2 block text-[10px] font-medium uppercase tracking-[0.2em] text-neutral-400 transition group-focus-within:text-[#0057ff]">
                         Full name
                       </span>
 
@@ -147,13 +149,13 @@ export default function Checkout() {
                         required
                         type="text"
                         placeholder="Your name"
-                        className="w-full border-0 border-b border-neutral-400 bg-transparent px-0 py-3 text-sm text-white outline-none placeholder:text-neutral-400 transition focus:border-white"
+                        className="w-full border-0 border-b border-neutral-400 bg-transparent px-0 py-3 text-sm text-black outline-none placeholder:text-neutral-400 transition focus:border-[#0057ff]"
                       />
                     </label>
 
                     {/* Phone */}
                     <label className="group block">
-                      <span className="mb-2 block text-[10px] font-medium uppercase tracking-[0.2em] text-neutral-400 transition group-focus-within:text-white">
+                      <span className="mb-2 block text-[10px] font-medium uppercase tracking-[0.2em] text-neutral-400 transition group-focus-within:text-[#0057ff]">
                         Phone number
                       </span>
 
@@ -167,13 +169,13 @@ export default function Checkout() {
                         required
                         type="tel"
                         placeholder="Your phone number"
-                        className="w-full border-0 border-b border-neutral-400 bg-transparent px-0 py-3 text-sm text-white outline-none placeholder:text-neutral-400 transition focus:border-white"
+                        className="w-full border-0 border-b border-neutral-400 bg-transparent px-0 py-3 text-sm text-black outline-none placeholder:text-neutral-400 transition focus:border-[#0057ff]"
                       />
                     </label>
 
                     {/* Address */}
                     <label className="group block sm:col-span-2">
-                      <span className="mb-2 block text-[10px] font-medium uppercase tracking-[0.2em] text-neutral-400 transition group-focus-within:text-white">
+                      <span className="mb-2 block text-[10px] font-medium uppercase tracking-[0.2em] text-neutral-400 transition group-focus-within:text-[#0057ff]">
                         Address
                       </span>
 
@@ -187,13 +189,13 @@ export default function Checkout() {
                         required
                         type="text"
                         placeholder="Street address"
-                        className="w-full border-0 border-b border-neutral-400 bg-transparent px-0 py-3 text-sm text-white outline-none placeholder:text-neutral-400 transition focus:border-white"
+                        className="w-full border-0 border-b border-neutral-400 bg-transparent px-0 py-3 text-sm text-black outline-none placeholder:text-neutral-400 transition focus:border-[#0057ff]"
                       />
                     </label>
 
                     {/* City */}
                     <label className="group block">
-                      <span className="mb-2 block text-[10px] font-medium uppercase tracking-[0.2em] text-neutral-400 transition group-focus-within:text-white">
+                      <span className="mb-2 block text-[10px] font-medium uppercase tracking-[0.2em] text-neutral-400 transition group-focus-within:text-[#0057ff]">
                         City
                       </span>
 
@@ -207,13 +209,13 @@ export default function Checkout() {
                         required
                         type="text"
                         placeholder="City"
-                        className="w-full border-0 border-b border-neutral-400 bg-transparent px-0 py-3 text-sm text-white outline-none placeholder:text-neutral-400 transition focus:border-white"
+                        className="w-full border-0 border-b border-neutral-400 bg-transparent px-0 py-3 text-sm text-black outline-none placeholder:text-neutral-400 transition focus:border-[#0057ff]"
                       />
                     </label>
 
                     {/* State */}
                     <label className="group block">
-                      <span className="mb-2 block text-[10px] font-medium uppercase tracking-[0.2em] text-neutral-400 transition group-focus-within:text-white">
+                      <span className="mb-2 block text-[10px] font-medium uppercase tracking-[0.2em] text-neutral-400 transition group-focus-within:text-[#0057ff]">
                         State
                       </span>
 
@@ -227,13 +229,13 @@ export default function Checkout() {
                         required
                         type="text"
                         placeholder="State"
-                        className="w-full border-0 border-b border-neutral-400 bg-transparent px-0 py-3 text-sm text-white outline-none placeholder:text-neutral-400 transition focus:border-white"
+                        className="w-full border-0 border-b border-neutral-400 bg-transparent px-0 py-3 text-sm text-black outline-none placeholder:text-neutral-400 transition focus:border-[#0057ff]"
                       />
                     </label>
 
                     {/* PIN */}
                     <label className="group block">
-                      <span className="mb-2 block text-[10px] font-medium uppercase tracking-[0.2em] text-neutral-400 transition group-focus-within:text-white">
+                      <span className="mb-2 block text-[10px] font-medium uppercase tracking-[0.2em] text-neutral-400 transition group-focus-within:text-[#0057ff]">
                         PIN code
                       </span>
 
@@ -248,7 +250,7 @@ export default function Checkout() {
                         type="text"
                         inputMode="numeric"
                         placeholder="PIN code"
-                        className="w-full border-0 border-b border-neutral-400 bg-transparent px-0 py-3 text-sm text-white outline-none placeholder:text-neutral-400 transition focus:border-white"
+                        className="w-full border-0 border-b border-neutral-400 bg-transparent px-0 py-3 text-sm text-black outline-none placeholder:text-neutral-400 transition focus:border-[#0057ff]"
                       />
                     </label>
                   </div>
@@ -259,11 +261,11 @@ export default function Checkout() {
               <section>
                 <div className="mb-7 flex items-start gap-5">
                   <div>
-                    <h2 className="text-xl font-medium uppercase tracking-[-0.02em]">
+                    <h2 className="text-xl font-medium text-[#0057ff] uppercase tracking-widest">
                       Payment method
                     </h2>
 
-                    <p className="mt-2 text-sm text-neutral-400">
+                    <p className="mt-2 text-sm text-black/90">
                       Choose your preferred payment method.
                     </p>
                   </div>
@@ -274,8 +276,8 @@ export default function Checkout() {
                   <label
                     className={` group relative cursor-pointer p-9 transition ${
                       paymentMethod === "cod"
-                        ? "bg-[#740505] rounded-2xl text-[#f8f7f4]"
-                        : "rounded-2xl bg-[#20202a]"
+                        ? "bg-[#0057ff] rounded-2xl text-[#f8f7f4]"
+                        : "rounded-2xl bg-blue-200 text-black/90"
                     }`}
                   >
                     <div className="flex items-start justify-between">
@@ -285,8 +287,8 @@ export default function Checkout() {
                         <p
                           className={`mt-2 text-xs ${
                             paymentMethod === "cod"
-                              ? "text-neutral-100"
-                              : "text-neutral-100"
+                              ? "text-[#f8f7f4]"
+                              : "text-black/80"
                           }`}
                         >
                           Pay when your order arrives
@@ -308,8 +310,8 @@ export default function Checkout() {
                   <label
                     className={`group relative cursor-pointer p-9 transition ${
                       paymentMethod === "online"
-                        ? "bg-[#740505] rounded-2xl text-[#f8f7f4]"
-                        : "rounded-2xl bg-[#20202a]"
+                        ? "bg-[#0057ff] rounded-2xl text-[#f8f7f4]"
+                        : "rounded-2xl bg-blue-200 text-black/90"
                     }`}
                   >
                     <div className="flex items-start justify-between">
@@ -319,8 +321,8 @@ export default function Checkout() {
                         <p
                           className={`mt-2 text-xs ${
                             paymentMethod === "online"
-                              ? "text-neutral-100"
-                              : "text-neutral-100"
+                              ? "text-[#f8f7f4]"
+                              : "text-black/80"
                           }`}
                         >
                           Pay securely online
@@ -342,17 +344,17 @@ export default function Checkout() {
             </main>
 
             {/* ================= RIGHT ================= */}
-            <aside className="h-fit  rounded-3xl border-2 border-white/20 lg:sticky lg:top-24">
+            <aside className="h-fit  rounded-3xl border-2 border-gray-300 lg:sticky lg:top-24">
               {/* Summary Header */}
-              <div className="border-b border-neutral-500 p-6">
+              <div className="border-b border-gray-300 p-6">
                 <div className="flex items-start justify-between">
                   <div>
-                    <h2 className="text-xl font-medium uppercase tracking-[-0.02em]">
+                    <h2 className="text-xl text-[#0057ff] font-medium uppercase tracking-[-0.02em]">
                       Order summary
                     </h2>
                   </div>
 
-                  <span className="font-mono text-md text-neutral-100">
+                  <span className="font-mono text-md text-black/90">
                     {carts?.length ?? 0} ITEMS
                   </span>
                 </div>
@@ -366,20 +368,20 @@ export default function Checkout() {
                       <div
                         key={item.id}
                         className={`flex items-start justify-between gap-4 py-5 ${
-                          index !== 0 ? "border-t border-neutral-400" : ""
+                          index !== 0 ? "border-t border-gray-300" : ""
                         }`}
                       >
                         <div className="min-w-0">
-                          <p className="truncate text-md font-medium">
+                          <p className="truncate text-md text-black/90 font-medium">
                             {item.name}
                           </p>
 
-                          <p className="mt-2 font-mono text-sm uppercase tracking-[0.15em] text-neutral-300">
-                            Quantity: {item.quantity}
+                          <p className="mt-2 font-mono text-sm uppercase tracking-[0.15em] text-black/90">
+                            <span className="text-[#0057ff]">Quantity:</span> {item.quantity}
                           </p>
                         </div>
 
-                        <p className="shrink-0 text-sm">
+                        <p className="text-black/90 shrink-0 text-md font-semibold tracking-wider">
                           ₹{item.price * item.quantity}
                         </p>
                       </div>
@@ -388,32 +390,32 @@ export default function Checkout() {
                 </div>
 
                 {/* Divider */}
-                <div className="my-3 border-t border-neutral-400" />
+                <div className="my-3 border-t border-gray-300" />
 
                 {/* Prices */}
                 <div className="space-y-4 pt-4 text-md">
                   <div className="flex justify-between text-neutral-100">
-                    <span>Subtotal</span>
-                    <span className="text-neutral-100">₹{totalPrice}</span>
+                    <span className="text-[#0057ff]">Subtotal</span>
+                    <span className="text-black/90 font-semibold tracking-wider text-lg">₹{totalPrice}</span>
                   </div>
 
                   <div className="flex justify-between text-neutral-100">
-                    <span>Shipping</span>
-                    <span className="uppercase tracking-wide text-white">
+                    <span className="text-[#0057ff]">Shipping</span>
+                    <span className="uppercase tracking-wide text-black/90">
                       Free
                     </span>
                   </div>
 
-                  <div className="mt-5 flex items-end justify-between border-t border-neutral-800 pt-5">
+                  <div className="mt-5 flex items-end justify-between border-t border-gray-300 pt-5">
                     <div>
-                      <p className="text-[10px] uppercase tracking-[0.2em] text-neutral-100">
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-[#0057ff]">
                         Total
                       </p>
 
-                      <p className="mt-2 text-xl font-medium">₹{totalPrice}</p>
+                      <p className="mt-2 text-xl font-semibold tracking-wider text-black/90">₹{totalPrice}</p>
                     </div>
 
-                    <span className="font-mono text-[15px] text-white/50">
+                    <span className="font-mono text-[15px] text-black/50">
                       INR
                     </span>
                   </div>
@@ -422,9 +424,9 @@ export default function Checkout() {
                 {/* Place Order */}
                 <button
                   type="submit"
-                  className=" cursor-pointer mt-8 flex w-full items-center rounded-2xl justify-between bg-[#740505] px-5 py-4 text-sm font-medium uppercase tracking-[0.08em] text-white transition hover:bg-[#9a0808]"
+                  className=" cursor-pointer mt-8 flex w-full items-center rounded-2xl justify-between bg-[#0035a0] px-5 py-4 text-sm font-medium uppercase tracking-[0.08em] text-white transition hover:bg-[#0057ff]"
                 >
-                  <span>Place order</span>
+                  <span className="text-[#f8f7f4]">Place order</span>
 
                   <span className="text-lg leading-none">→</span>
                 </button>
