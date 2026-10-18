@@ -1,5 +1,5 @@
 import axios from "axios";
-const API_URL = "http://localhost:3000/orders";
+const API_URL = "https://jdmflux-api.onrender.com/orders";
 
 export const getUsersOrders = async () => {
   const res = await axios.get(API_URL);
