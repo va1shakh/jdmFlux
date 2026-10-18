@@ -1,5 +1,5 @@
 import axios from 'axios'
-const API_URL = "http://localhost:3000/users";
+const API_URL = "https://jdmflux-api.onrender.com/users";
 
 export const login = async ({ email, password }) => {
     const res = await axios.get(`${API_URL}?email=${email}&password=${password}`);

@@ -34,7 +34,7 @@ function Register() {
         email: formData.email,
         phone: formData.phone,
         password: formData.password,
-        createdAt: new Date().toIsoString()
+        createdAt: new Date().toISOString()
       });
     }
     else{
