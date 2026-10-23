@@ -21,7 +21,7 @@ const statusItems = [
   "CANCELLED",
 ];
 
-export function OrdersPage() {
+export default function OrdersPage() {
   const [filter, setFilter] = useState("ALL");
   const [search, setSearch] = useState("");
   const debSearch = useDebouncing({ search, delay: 500 });

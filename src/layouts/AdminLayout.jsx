@@ -5,7 +5,7 @@ import { useLogout } from "../admin/hooks/useLogout";
 import { useGetUserInfo } from "../hooks/useGetUserInfo";
 import { useSelector } from "react-redux";
 
-export function AdminLayout() {
+export default function AdminLayout() {
   const user = useSelector((state) => state.auth.user);
 
   //AdminInfo

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   ArrowDownUp,
   ChevronDown,
@@ -79,7 +79,7 @@ function StockBadge({ stock }) {
   );
 }
 
-export function ProductsPage() {
+export default function ProductsPage() {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [productToEdit, setProductToEdit] = useState(null);
   const [search, setSearch] = useState("");
@@ -90,12 +90,14 @@ export function ProductsPage() {
   //fetching products
   const { data: allProducts = [] } = useGetProducts();
   const products = allProducts.filter((product) => product.isDeleted === false);
-  const filteredProducts = filterProducts({
-    products,
-    Dsearch,
-    category,
-    sort,
-  });
+  const filteredProducts = useMemo(() => {
+    return filterProducts({
+      products,
+      Dsearch,
+      category,
+      sort,
+    });
+  }, [products, Dsearch, category, sort]);
 
   //pagination
   const [page, setPage] = useState(1);
@@ -161,9 +163,7 @@ export function ProductsPage() {
           <div className="rounded-2xl bg-[#ffdd00] p-4 sm:p-5 drop-shadow-lg drop-shadow-white">
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="text-sm font-medium text-black  ">
-                  Low stock
-                </p>
+                <p className="text-sm font-medium text-black  ">Low stock</p>
                 <p className="mt-2 text-2xl font-semibold tracking-tight">
                   {lowStockCount}
                 </p>

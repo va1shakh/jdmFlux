@@ -20,7 +20,7 @@ const formatPrice = (price) => {
   }).format(price);
 };
 
-export function Dashboard() {
+export default function Dashboard() {
   const navigate = useNavigate();
   const { data: products = [] } = useGetProducts();
   const { data: orders = [] } = useGetUsersOrders();

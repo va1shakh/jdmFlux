@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   Users,
   UserCheck,
@@ -14,7 +14,7 @@ import { useGetUsers } from "../hooks/useGetUsers";
 import { useDebouncing } from "../hooks/useDebouncing";
 import { filter_sort_users } from "../api/filter_sort_users";
 
-export function UsersPage() {
+export default function UsersPage() {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
   const [sort, setSort] = useState("newest");
@@ -49,7 +49,10 @@ export function UsersPage() {
   const [page, setPage] = useState(1);
   const pageSize = 8;
   const totalPages = Math.ceil(users?.length / pageSize);
-  const paginatedUsers = filteredUsers?.slice((page - 1) * pageSize, page * pageSize);
+  const paginatedUsers = filteredUsers?.slice(
+    (page - 1) * pageSize,
+    page * pageSize,
+  );
 
   return (
     <section className="w-full min-w-0 space-y-6 text-slate-900 py-6">
@@ -152,10 +155,7 @@ export function UsersPage() {
         {/* Pagination */}
         <footer className="flex flex-col gap-3 border-t border-slate-200 px-4 py-4 sm:flex-row sm:items-center sm:justify-between sm:px-5">
           <p className="text-sm text-slate-500">
-            Showing{" "}
-            <span className="font-medium text-slate-800">
-              {page}
-            </span>{" "}
+            Showing <span className="font-medium text-slate-800">{page}</span>{" "}
             of{" "}
             <span className="font-medium text-slate-800">
               {filteredUsers.length}
@@ -174,9 +174,7 @@ export function UsersPage() {
               Previous
             </button>
 
-            <span className="px-2 text-sm tabular-nums text-black">
-              {page}
-            </span>
+            <span className="px-2 text-sm tabular-nums text-black">{page}</span>
 
             <button
               type="button"
